@@ -1975,7 +1975,56 @@ public class ClassPrac extends TemplateClass {
             System.out.print(elementIdxMap.get(copy[i]) + " ");
         }
     }
-        static class Height {
+    
+    public static void firstNegativeNumber(int[] arr, int k){
+        // create a new arr of size k
+        // init the new arr
+        // shift the new arr on left by removing the 1st element
+        // and adding the last element as arr[i]
+        // find the first -ve number
+
+        int n = arr.length;
+
+        int[] new_arr = new int[k];
+
+        for (int i = 0; i < k; i++) {
+            new_arr[i] = arr[i];
+        }
+
+        findMin(new_arr);
+
+        for (int i = k-1; i < n-1; i++) {
+            shift(new_arr, arr[i+1]);
+            findMin(new_arr);
+        }
+    }
+
+
+    public static void shift(int[] a, int ele){
+        int n = a.length;
+
+        for (int i = 1; i < n; i++) {
+            a[i-1] = a[i];
+        }
+
+        a[n-1] = ele;
+
+    }
+
+    public static void findMin(int[] a){
+        int i;
+        for (i = 0; i < a.length; i++) {
+            if(a[i] < 0) {
+                System.out.print(a[i] + " ");
+                break;
+            }
+        }
+
+        if (i == a.length) System.out.print(0 + " ");
+
+    }
+
+    static class Height {
         int feet;
         int inches;
         public Height(int ft, int inc)

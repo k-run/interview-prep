@@ -1,3 +1,4 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.xml.internal.ws.encoding.MtomCodec;
 import javafx.util.Pair;
 import org.omg.PortableInterceptor.INACTIVE;
@@ -1953,6 +1954,26 @@ public class ClassPrac extends TemplateClass {
         Set<Integer> set = new HashSet<>(Utils.getListFromIntArray(arr));
 
         System.out.println(set.stream().reduce(Integer::sum).get());
+    }
+
+    public static void convertArrayToReducedForm(int[] arr){
+        // sort the given arr
+        // store the element vs idx in the map
+        // for every element, print it's idx
+
+        int n = arr.length;
+        int[] copy = Arrays.copyOf(arr, n);
+        Arrays.sort(arr);
+
+        HashMap<Integer, Integer> elementIdxMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            elementIdxMap.put(arr[i], i);
+        }
+
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(elementIdxMap.get(copy[i]) + " ");
+        }
     }
         static class Height {
         int feet;

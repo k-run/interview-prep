@@ -2073,6 +2073,20 @@ public class ClassPrac extends TemplateClass {
                 System.out.print(a[i] + " ");
         }
     }
+
+    public static void maxValueInBitonicArray(int[] arr, int l, int h){
+        // if l == h, return l
+        // if middle element is > middle + 1, search from l to m
+        // else search from m+1 to h
+
+        while(l<h) {
+            int m = (l+h)/2;
+            if(arr[m] > arr[m+1]) h = m;
+            else l = m+1;
+        }
+
+        System.out.println(arr[l]);
+    }
     static class Height {
         int feet;
         int inches;

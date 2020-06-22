@@ -2024,6 +2024,40 @@ public class ClassPrac extends TemplateClass {
 
     }
 
+
+    public static void countOfSubArraysWithKPrimes(int[] a, int k){
+        // if a number is prime, mark it as 1 else 0
+        // now, problem reduces to countof subarrays with sum as k
+
+        int n = a.length;
+        for (int i = 0; i < n; i++) {
+            if(a[i] == 1) a[i] = 0;
+            else {
+                a[i] = (isPrime(a[i]) ? 1 : 0);
+            }
+        }
+
+        int[] c_sum = new int[n];
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += a[i];
+            c_sum[i] = sum;
+        }
+
+        int count = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if(c_sum[i] == k) count++;
+            else {
+                if(map.containsKey(c_sum[i] - k)) {
+                    count += map.get(c_sum[i] - k);
+                }
+                else map.put(c_sum[i], map.getOrDefault(c_sum[i],0) + 1);
+            }
+        }
+
+        System.out.println("count = " + count);
+    }
     static class Height {
         int feet;
         int inches;

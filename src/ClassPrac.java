@@ -2058,6 +2058,21 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count = " + count);
     }
+    
+    public static void largestFibonacciSubsequence(int[] a){
+        // check if every number of this arr
+        // is a fibonacci number using the property
+        // 5n2 +_ 4 is a perfect square
+
+        int n = a.length;
+
+        for (int i = 0; i < n; i++) {
+            int x = a[i];
+
+            if(Utils.isPerfectSquare((5 * x * x + 4)) || Utils.isPerfectSquare((5 * x * x - 4)))
+                System.out.print(a[i] + " ");
+        }
+    }
     static class Height {
         int feet;
         int inches;

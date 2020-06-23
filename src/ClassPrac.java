@@ -3,11 +3,13 @@ import com.sun.xml.internal.ws.encoding.MtomCodec;
 import javafx.util.Pair;
 import org.omg.PortableInterceptor.INACTIVE;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -2087,6 +2089,80 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println(arr[l]);
     }
+    
+    public static void minProductSubset(int[] arr){
+        // keep count of -ve and +ve elements
+        // if -veCount is even, select the max -ve and multiply with +ve product
+        // else if -veCount is odd, product of all elements
+        // if all elements are +ve, min +ve
+        // if all elements are -ve, then depending on count
+
+        int n = arr.length;
+
+        int product = 1, maxNegative = Integer.MAX_VALUE;
+        int minNegative = Integer.MAX_VALUE, countP = 0, countN =0;
+        int minPositive = Integer.MAX_VALUE, ans = 0;
+
+        boolean isZero = false;
+
+        for (int i = 0; i < n; i++) {
+            if(arr[i] < 0) {
+                countN++;
+                minNegative = Math.min(minNegative, arr[i]);
+                maxNegative = Math.max(maxNegative, arr[i]);
+            }
+
+            else {
+                if(arr[i] == 0)
+                {
+                    isZero = true;
+                    countP++;
+                    minPositive = Math.min(minPositive, arr[i]);
+                }
+            }
+
+            if(arr[i] !=0) product *= arr[i];
+        }
+
+
+        if(countN % 2 !=0) ans = product;
+
+        else if(countN == 0) ans = minPositive;
+
+        else if(countN %2 ==0){
+            if(!isZero) ans = product/minNegative;
+            else ans = maxNegative;
+        }
+
+        System.out.println("ans = " + ans);
+    }
+
+    public static void xorQuery(int l, int r){
+        // create the xor arr according to the formula
+        // find the sum between the ranges
+
+        int[] arr = new int[(int)Math.pow(10, 8)];
+        arr[0] = 1;
+
+//        int n = arr.length;
+//        for (int i = 1; i < n; i++) {
+//            arr[i] = (arr[i-1] ^ (i+1));
+//        }
+
+        int ans = 0;
+        for (int i = 1; i < l; i++) {
+            ans ^= i;
+        }
+
+        int sum = 0;
+        for (int i = l; i <= r ; i++) {
+            ans ^= i;
+            sum += ans;
+        }
+
+        System.out.println("sum = " + sum);
+    }
+
     static class Height {
         int feet;
         int inches;

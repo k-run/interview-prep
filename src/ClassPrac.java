@@ -2163,6 +2163,21 @@ public class ClassPrac extends TemplateClass {
         System.out.println("sum = " + sum);
     }
 
+    public static void isFibonacci(int n){
+    // if a number follows 5n2 +_ 4 should be a perfect sq law
+        // then yes,else no
+
+        int x = 5*n*n + 4;
+        int y = 5*n*n - 4;
+
+        int s = (int) Math.sqrt(x);
+        boolean isX = (s*s) == x;
+
+        s = (int) Math.sqrt(y);
+        boolean isY = (s*s) == y;
+
+        System.out.println((isX || isY) ? "Yes": "No");
+    }
     static class Height {
         int feet;
         int inches;

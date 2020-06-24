@@ -23,4 +23,13 @@ public class Utils {
         int s = (int) Math.sqrt(n);
         return ((s*s) == n);
     }
+
+    public static void print2DArray(int[][] a){
+        for (int[] ai: a) {
+            for (int x: ai) {
+                System.out.print(x + " ");
+            }
+            System.out.println();
+        }
+    }
 }

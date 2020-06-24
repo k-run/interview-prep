@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +21,7 @@ public class TemplateClass {
                 arr[j] = Integer.parseInt(str[j]);
             }
 
-            ClassPrac.sumOfDistinctElements(arr, n);
+
         }
     }
     
@@ -37,7 +38,6 @@ public class TemplateClass {
                 arr[j] = Integer.parseInt(str[j]);
             }
 
-          ClassPrac.countOfSubarraysWithKPrime(arr,k);
         }
 
     }
@@ -52,12 +52,61 @@ public class TemplateClass {
             ClassPrac.countOccurencesOfAnagrams(a, b);
         }
     }
+    
+    public static void inputAsTcMatrixPoints() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int tc = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < tc; i++) {
+            String[] rc = (br.readLine().split(" "));
+            int row = Integer.parseInt(rc[0]);
+
+            int col = Integer.parseInt(rc[1]);
+
+            int[][] arr = new int[row][col];
+
+            String[] data = br.readLine().split(" ");
+
+            int l = 0;
+            for (int j = 0; j < row; j++) {
+                for (int k = 0; k < col; k++) {
+                    int arrItem = Integer.parseInt(data[l++]);
+                    arr[j][k] = arrItem;
+                }
+
+            }
+
+            String[] points = br.readLine().split(" ");
+
+            int x1 = Integer.parseInt(points[0]);
+            int y1 = Integer.parseInt(points[1]);
+            int x2 = Integer.parseInt(points[2]);
+            int y2 = Integer.parseInt(points[3]);
+
+            Point a = new Point(x1, y1);
+            Point b = new Point(x2, y2);
+
+            ClassPrac.additionOfSubMatrix(arr, a, b);
+        }
+    }
+
+    public static void inputAsTcN() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            int n = Integer.parseInt(br.readLine());
+            ClassPrac.isFibonacci(n);
+        }
+    }
+
+
 
     public static void main (String[] args) throws IOException
     {
         //code
-
-        inputAsTcNArray();
+        inputAsTcN();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

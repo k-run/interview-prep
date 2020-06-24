@@ -2178,6 +2178,18 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println((isX || isY) ? "Yes": "No");
     }
+
+    public static void countSetBits(int n){
+        // on subtracting 1 from n, all the bits from rightmost flip
+        // if we do n & n-1 a times, then a is the answer
+        int count = 0;
+        while(n!=0) {
+            n &= (n-1);
+            count++;
+        }
+
+        System.out.println("count = " + count);
+    }
     static class Height {
         int feet;
         int inches;

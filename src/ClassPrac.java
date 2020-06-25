@@ -2190,33 +2190,6 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count = " + count);
     }
-
-    public static void numberOfSubArraysWithSumAsK(int[] arr, int k){
-        // subarray means csum, so create a csum arr
-        // create a map
-        // traverse the arr, if arr ele == k, count++
-        // if map contains ele - k, count += map.get(ele-k)
-        int n = arr.length, sum = 0;
-
-        int[] c_sum = new int[n];
-        for (int i = 0; i < n; i++) {
-            sum += arr[i];
-            c_sum[i] = sum;
-        }
-
-        HashMap<Integer,Integer> map = new HashMap<>();
-        int count = 0;
-
-        for (int i = 0; i < n; i++) {
-            if(c_sum[i] == k) count++;
-
-            if(map.containsKey(c_sum[i] - k)) count+= map.get(c_sum[i] - k);
-            else map.put(c_sum[i], map.getOrDefault(c_sum[i], 0) + 1);
-        }
-
-        System.out.println("count = " + count);
-    }
-
     static class Height {
         int feet;
         int inches;

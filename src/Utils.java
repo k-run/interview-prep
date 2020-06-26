@@ -24,12 +24,16 @@ public class Utils {
         return ((s*s) == n);
     }
 
-    public static void print2DArray(int[][] a){
-        for (int[] ai: a) {
-            for (int x: ai) {
+    public static <T> void print2DArray(T[][] a){
+        for (T[] ai: a) {
+            for (T x: ai) {
                 System.out.print(x + " ");
             }
             System.out.println();
         }
+    }
+
+    public static void printIntArray(int[] arr){
+        Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
     }
 }

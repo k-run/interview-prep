@@ -2253,7 +2253,39 @@ public class ClassPrac extends TemplateClass {
         }
         System.out.println("count = " + (count/2));
     }
+    
+    public static void caseSort(String str){
+        // store all lower case chars into one string
+        // store all upper ones into another
+        // sort both
+        // while traversing the string,
+        // if char's case is upper, take from one
+        // else take from other
 
+        StringBuilder upper = new StringBuilder(), lower = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if(Character.isUpperCase(str.charAt(i))) upper.append(str.charAt(i));
+            else lower.append(str.charAt(i));
+        }
+
+        char[] upperC = upper.toString().toCharArray();
+        Arrays.sort(upperC);
+
+
+        char[] lowerC = lower.toString().toCharArray();
+        Arrays.sort(lowerC);
+
+        StringBuilder ans = new StringBuilder();
+
+        int j = 0,k =0;
+        for (int i = 0; i < str.length(); i++) {
+            if(Character.isUpperCase(str.charAt(i))) ans.append(upperC[j++]);
+            else ans.append(lowerC[k++]);
+        }
+
+        System.out.println("ans = " + ans);
+    }
     static class Height {
         int feet;
         int inches;

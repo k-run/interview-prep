@@ -2,10 +2,8 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class TemplateClass {
@@ -37,6 +35,7 @@ public class TemplateClass {
                 arr[j] = Integer.parseInt(str[j]);
             }
 
+            ClassPrac.pairsWithASum(arr, k);
         }
 
     }
@@ -113,10 +112,20 @@ public class TemplateClass {
         }
 
 
+    public static void inputAsTcStrings() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String a = br.readLine();
+
+            ClassPrac.caseSort(a);
+        }
+    }
+
     public static void main (String[] args) throws IOException
     {
         //code
-        inputAsTcN();
+        inputAsTcStrings();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

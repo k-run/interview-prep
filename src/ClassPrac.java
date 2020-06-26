@@ -1,19 +1,12 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.internal.ws.encoding.MtomCodec;
 import javafx.util.Pair;
-import org.omg.PortableInterceptor.INACTIVE;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 public class ClassPrac extends TemplateClass {
@@ -1074,23 +1067,6 @@ public class ClassPrac extends TemplateClass {
         System.out.println("max = " + max);
 
     }
-    
-    public static void nearlySortedAlgorithm(int[] arr, int k){
-        // take every k length subarrays and sort them
-        int n = arr.length;
-
-        for (int i = 0; i < n; i++) {
-            int[] subArr = Arrays.copyOfRange(arr, i, ((i+k) > n ? n : (i + k)));
-            Arrays.stream(subArr).forEach(e-> System.out.print(e + " "));
-            System.out.println();
-            Arrays.sort(subArr);
-            System.arraycopy(subArr, i, arr, i, ((i+k) > n ? (n-i+k) : (i+k)));
-            Arrays.stream(arr).forEach(e-> System.out.print(e + " "));
-            System.out.println();
-        }
-
-        Arrays.stream(arr).forEach(e-> System.out.print(e + " "));
-    }
 
     public static void maximizeToys(int[] arr, int x){
         // if a toy's cost is less than x, deduct x and increment count
@@ -1309,15 +1285,12 @@ public class ClassPrac extends TemplateClass {
         }
 
         System.out.println("merge process");
-        printIntArray(res);
+        Utils.printIntArray(res);
 
         return res;
     }
 
 
-    public static void printIntArray(int[] arr){
-        Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
-    }
     public static void detective(int[] arr, int n){
 //        // init a map with key 0 and value as list from 1 to n
 //        // create a map of keys as freq and values as list of elements
@@ -1401,7 +1374,7 @@ public class ClassPrac extends TemplateClass {
             }
         }
 
-        printIntArray(arr);
+        Utils.printIntArray(arr);
     }
     
     public static void countPairsWithSum(int[] arr, int k){
@@ -1519,7 +1492,7 @@ public class ClassPrac extends TemplateClass {
             }
         }
 
-        printIntArray(res);
+        Utils.printIntArray(res);
     }
     
     
@@ -1783,7 +1756,7 @@ public class ClassPrac extends TemplateClass {
         }
 
         arr2[n-1] = arr[n-1];
-        printIntArray(arr2);
+        Utils.printIntArray(arr2);
     }
     
     public static void countOccurencesOfAnagrams(String a, String b){
@@ -1860,7 +1833,7 @@ public class ClassPrac extends TemplateClass {
         
         new_arr[mid] = min;
         System.out.println("min element is set");
-        printIntArray(new_arr);
+        Utils.printIntArray(new_arr);
 
         // left side
         int k =1;
@@ -1870,7 +1843,7 @@ public class ClassPrac extends TemplateClass {
         }
 
         System.out.println("left side");
-        printIntArray(new_arr);
+        Utils.printIntArray(new_arr);
 
         k = n-1;
         for (int i = n-1; i > mid ; i--) {
@@ -1879,7 +1852,7 @@ public class ClassPrac extends TemplateClass {
         }
 
         System.out.println("right side");
-        printIntArray(new_arr);
+        Utils.printIntArray(new_arr);
 
     }
     
@@ -2230,7 +2203,7 @@ public class ClassPrac extends TemplateClass {
             i++;
         }
 
-        printIntArray(arr);
+        Utils.printIntArray(arr);
     }
     
     public static void pairsWithASum(int[] arr, int k){
@@ -2323,10 +2296,6 @@ public class ClassPrac extends TemplateClass {
         int n = str.length();
 
         str = str.replaceAll(", ", "").toLowerCase();
-        char[] chars = str.toCharArray();
-        Arrays.sort(chars);
-        str = new String(chars);
-
         System.out.println("str = " + str);
 
 
@@ -2337,7 +2306,6 @@ public class ClassPrac extends TemplateClass {
 
         else {
             String aToZ = "abcdefghijklmnopqrstuvwxyz";
-
             for (int i = 0; i < aToZ.length(); i++) {
                 if(str.indexOf(aToZ.charAt(i)) == -1) {
                     System.out.println("char not present: " + aToZ.charAt(i));

@@ -2286,6 +2286,28 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("ans = " + ans);
     }
+    
+    public static void minChangesToMakeSubstringsDistinct(String str){
+        // remove all dupes
+        // create a map of char vs freq
+        // while at the time of adding, if freq is not null
+        // count++
+
+        int n = str.length();
+        int count = 0;
+        HashMap<Character, Integer> map =new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if(map.get(str.charAt(i)) == null) map.put(str.charAt(i), 1);
+            else {
+                count++;
+                map.put(str.charAt(i), 1 + map.get(str.charAt(i)));
+            }
+        }
+
+        System.out.println("map = " + map);
+        System.out.println("count = " + count);
+    }
+
     static class Height {
         int feet;
         int inches;

@@ -2307,7 +2307,13 @@ public class ClassPrac extends TemplateClass {
         System.out.println("map = " + map);
         System.out.println("count = " + count);
     }
+    
+    public static void karatsuba(String a, String b){
+        Integer n1 = Integer.parseInt(a, 2);
+        Integer n2 = Integer.parseInt(b,2);
 
+        System.out.println(n1 * n2);
+    }
     static class Height {
         int feet;
         int inches;

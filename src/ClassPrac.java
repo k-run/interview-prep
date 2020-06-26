@@ -2297,7 +2297,7 @@ public class ClassPrac extends TemplateClass {
         int count = 0;
         HashMap<Character, Integer> map =new HashMap<>();
         for (int i = 0; i < n; i++) {
-            if(map.get(str.charAt(i)) == null) map.put(str.charAt(i), 1);
+            if (map.get(str.charAt(i)) == null) map.put(str.charAt(i), 1);
             else {
                 count++;
                 map.put(str.charAt(i), 1 + map.get(str.charAt(i)));
@@ -2313,6 +2313,41 @@ public class ClassPrac extends TemplateClass {
         Integer n2 = Integer.parseInt(b,2);
 
         System.out.println(n1 * n2);
+    }
+
+    public static void pangramChecking(String str){
+        // check str length, if>=26,
+        // create a string containing all chars from a to z
+        // if given str's every char's index is > -1, then 1 else 0
+
+        int n = str.length();
+
+        str = str.replaceAll(", ", "").toLowerCase();
+        char[] chars = str.toCharArray();
+        Arrays.sort(chars);
+        str = new String(chars);
+
+        System.out.println("str = " + str);
+
+
+        if(n < 26) {
+            System.out.println(0);
+            return;
+        }
+
+        else {
+            String aToZ = "abcdefghijklmnopqrstuvwxyz";
+
+            for (int i = 0; i < aToZ.length(); i++) {
+                if(str.indexOf(aToZ.charAt(i)) == -1) {
+                    System.out.println("char not present: " + aToZ.charAt(i));
+                    System.out.println(0);
+                    return;
+                }
+            }
+
+            System.out.println(1);
+        }
     }
     static class Height {
         int feet;

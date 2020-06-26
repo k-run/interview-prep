@@ -20,8 +20,7 @@ public class TemplateClass {
             for (int j = 0; j < n; j++) {
                 arr[j] = Integer.parseInt(str[j]);
             }
-
-
+            
         }
     }
     
@@ -87,11 +86,10 @@ public class TemplateClass {
 
             Point a = new Point(x1, y1);
             Point b = new Point(x2, y2);
-
-            ClassPrac.additionOfSubMatrix(arr, a, b);
+            
         }
     }
-
+    
     public static void inputAsTcN() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine());
@@ -100,7 +98,19 @@ public class TemplateClass {
             ClassPrac.isFibonacci(n);
         }
     }
+    
+    public static void inputAsTcKArrays() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String[] nk = br.readLine().split(" ");
+            int n = Integer.parseInt(nk[0]);
+            int k = Integer.parseInt(nk[1]);
 
+                ClassPrac.maxValueAfterMRange(n,k);
+            }
+
+        }
 
 
     public static void main (String[] args) throws IOException

@@ -2190,6 +2190,27 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count = " + count);
     }
+    
+    public static void maxValueAfterMRange(int n, int k) throws IOException {
+        // incr arr[a] to arr[b] by k
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int[] arr = new int[n];
+
+        for (int j = 0; j < k; j++) {
+            String[] abk = br.readLine().split(" ");
+            int a = Integer.parseInt(abk[0]);
+            int b = Integer.parseInt(abk[1]);
+            int c = Integer.parseInt(abk[2]);
+
+            for (int i = a; i <= b; i++) {
+                arr[i] += c;
+            }
+
+        }
+
+        System.out.println(Arrays.stream(arr).max().getAsInt());
+    }
+
     static class Height {
         int feet;
         int inches;

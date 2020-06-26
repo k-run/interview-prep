@@ -2211,6 +2211,28 @@ public class ClassPrac extends TemplateClass {
         System.out.println(Arrays.stream(arr).max().getAsInt());
     }
 
+    public static void candies(int n, int k){
+        // create an empty result arr
+        // for every index till k distribute
+
+        int[] arr = new int[k];
+
+        int remaining = n , j =0 ,i =1;
+
+        while(remaining > 0) {
+            System.out.println("remaining = " + remaining);
+            System.out.println("i = " + i);
+            if(j == arr.length) j = 0;
+
+            arr[j] += ((remaining - i) > 0 ? i : remaining);
+            remaining -= i;
+            j++;
+            i++;
+        }
+
+        printIntArray(arr);
+    }
+
     static class Height {
         int feet;
         int inches;

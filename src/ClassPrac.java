@@ -2232,6 +2232,27 @@ public class ClassPrac extends TemplateClass {
 
         printIntArray(arr);
     }
+    
+    public static void pairsWithASum(int[] arr, int k){
+        // create a map of ele vs freq
+        // if k- arr[i] exists update count
+        // if k-arr[i] = arr[i] count--
+        // lastly, count/2
+
+        HashMap<Integer, Integer> elementFreqMap = new HashMap<>();
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            elementFreqMap.put(arr[i], elementFreqMap.getOrDefault(arr[i],0) + 1);
+        }
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if(k - arr[i] == arr[i]) count--;
+            if(elementFreqMap.containsKey(k-arr[i])) count += elementFreqMap.get(k-arr[i]);
+            else elementFreqMap.put(k-arr[i], elementFreqMap.getOrDefault(k-arr[i],0) + 1);
+        }
+        System.out.println("count = " + (count/2));
+    }
 
     static class Height {
         int feet;

@@ -88,7 +88,7 @@ public class TemplateClass {
             Point a = new Point(x1, y1);
             Point b = new Point(x2, y2);
 
-            ClassPrac.additionOfSubMatrix(arr, a, b);
+
         }
     }
 

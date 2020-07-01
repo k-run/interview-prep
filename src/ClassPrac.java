@@ -2317,6 +2317,23 @@ public class ClassPrac extends TemplateClass {
             System.out.println(1);
         }
     }
+    
+    public static void orderingOfStrings(String str){
+        // two-pointer algo
+        // keep i at 0 & j at n-1
+        // whoever's value is less,inc/dec accordingly
+
+        int n = str.length();
+        str = str.toLowerCase();
+
+        String[] strArr = str.split(" ");
+
+        Arrays.sort(strArr);
+
+        System.out.println("start = " + strArr[0]);
+        System.out.println("end = " + strArr[strArr.length-1]);
+    }
+
     static class Height {
         int feet;
         int inches;

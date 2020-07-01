@@ -59,4 +59,19 @@ public class Problems {
 
 
     }
+
+    public static boolean isPalindrome(int n){
+        // if a number is negative, return false
+        // else do 2-pointer algo
+
+        if(n < 0) return false;
+
+        String init = String.valueOf(n);
+
+        StringBuilder stringBuilder = new StringBuilder(init);
+
+        String reversed = stringBuilder.reverse().toString();
+
+        return reversed.equals(init);
+    }
 }

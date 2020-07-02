@@ -1,3 +1,5 @@
+import LeetCode.Problems;
+
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -102,11 +104,19 @@ public class TemplateClass {
     }
 
 
+    public static void inputAsTcString() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String s = br.readLine();
+            Problems.romanToInteger(s);
+        }
+    }
 
     public static void main (String[] args) throws IOException
     {
         //code
-        inputAsTcN();
+        inputAsTcString();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

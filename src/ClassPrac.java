@@ -2334,6 +2334,21 @@ public class ClassPrac extends TemplateClass {
         System.out.println("end = " + strArr[strArr.length-1]);
     }
 
+    public static void minIndexedString(String str, String pat){
+        // traverse through the pat to find index in str
+        // update the min
+        
+        int n = pat.length();
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            int b = str.indexOf(pat.charAt(i));
+            if(b != -1) min = Math.min(min, b);
+        }
+
+        System.out.println((min==Integer.MAX_VALUE) ? "no character present" : min);
+    }
+    
     static class Height {
         int feet;
         int inches;

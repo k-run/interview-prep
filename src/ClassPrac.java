@@ -2348,6 +2348,23 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println((min==Integer.MAX_VALUE) ? "no character present" : min);
     }
+
+    public static void maximumDifference(int[] arr){
+        // keep track of max diff and the min ele so far
+        // init max diff as a[1]-a[0]
+        // and min ele as a[0]
+
+        int n = arr.length;
+        int minEle = arr[0];
+        int maxDiff = arr[1] - arr[0];
+
+        for (int i = 1; i < n; i++) {
+            if(arr[i] - minEle > maxDiff) maxDiff = arr[i] - minEle;
+            if(arr[i] < minEle) minEle = arr[i];
+        }
+
+        System.out.println("maxDiff = " + maxDiff);
+    }
     
     static class Height {
         int feet;

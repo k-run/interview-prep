@@ -23,7 +23,6 @@ public class TemplateClass {
                 arr[j] = Integer.parseInt(str[j]);
             }
 
-
         }
     }
     
@@ -39,7 +38,6 @@ public class TemplateClass {
             for (int j = 0; j < n; j++) {
                 arr[j] = Integer.parseInt(str[j]);
             }
-
         }
 
     }
@@ -51,7 +49,7 @@ public class TemplateClass {
             String a = br.readLine();
             String b = br.readLine();
 
-            ClassPrac.countOccurencesOfAnagrams(a, b);
+            ClassPrac.minIndexedString(a, b);
         }
     }
     
@@ -99,7 +97,7 @@ public class TemplateClass {
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
             int n = Integer.parseInt(br.readLine());
-            ClassPrac.isFibonacci(n);
+
         }
     }
 
@@ -110,6 +108,15 @@ public class TemplateClass {
         for (int i = 0; i < tc; i++) {
             String s = br.readLine();
             Problems.romanToInteger(s);
+        }
+    }
+    
+    public static void inputAsTcStringArr() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String[] a = br.readLine().split(",");
+
         }
     }
 

@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Problems {
     public static void twoSum(int[] arr, int k) {
@@ -128,5 +129,37 @@ public class Problems {
         }
 
         System.out.println("ans = " + ans);
+    }
+
+    public static boolean validParentheses(String string){
+        // push it to stack if an opening brace is found
+        // as soon as a closing is found, match the top
+        // of the stack with the closing one.
+
+        Stack<Character> openingStack = new Stack<>();
+        int n = string.length();
+
+        int i;
+        for (i = 0; i < n; i++) {
+            if(string.charAt(i) == '{' || string.charAt(i) == '('
+                    || string.charAt(i) == '[') openingStack.push(string.charAt(i));
+
+            else {
+                if(openingStack.isEmpty()) return false;
+                if(string.charAt(i) == '}') {
+                    if(openingStack.pop() != '{') break;
+                }
+
+                else if(string.charAt(i) == ')') {
+                    if(openingStack.pop() != '(') break;
+                }
+
+                else if(string.charAt(i) == ']') {
+                    if(openingStack.pop() != '[') break;
+                }
+            }
+        }
+
+        return openingStack.isEmpty() && i >= n;
     }
 }

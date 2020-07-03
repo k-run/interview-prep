@@ -1,6 +1,7 @@
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.xml.internal.ws.encoding.MtomCodec;
 import javafx.util.Pair;
+
 import org.omg.PortableInterceptor.INACTIVE;
 
 import java.awt.*;
@@ -2190,6 +2191,192 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count = " + count);
     }
+
+    public static void maxValueAfterMRange(int n, int k) throws IOException {
+        // incr arr[a] to arr[b] by k
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int[] arr = new int[n];
+
+        for (int j = 0; j < k; j++) {
+            String[] abk = br.readLine().split(" ");
+            int a = Integer.parseInt(abk[0]);
+            int b = Integer.parseInt(abk[1]);
+            int c = Integer.parseInt(abk[2]);
+
+            for (int i = a; i <= b; i++) {
+                arr[i] += c;
+            }
+
+        }
+
+        System.out.println(Arrays.stream(arr).max().getAsInt());
+    }
+
+    public static void candies(int n, int k){
+        // create an empty result arr
+        // for every index till k distribute
+
+        int[] arr = new int[k];
+
+        int remaining = n , j =0 ,i =1;
+
+        while(remaining > 0) {
+            System.out.println("remaining = " + remaining);
+            System.out.println("i = " + i);
+            if(j == arr.length) j = 0;
+
+            arr[j] += ((remaining - i) > 0 ? i : remaining);
+            remaining -= i;
+            j++;
+            i++;
+        }
+
+    }
+    
+    public static void pairsWithASum(int[] arr, int k){
+        // create a map of ele vs freq
+        // if k- arr[i] exists update count
+        // if k-arr[i] = arr[i] count--
+        // lastly, count/2
+
+        HashMap<Integer, Integer> elementFreqMap = new HashMap<>();
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            elementFreqMap.put(arr[i], elementFreqMap.getOrDefault(arr[i],0) + 1);
+        }
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if(k - arr[i] == arr[i]) count--;
+            if(elementFreqMap.containsKey(k-arr[i])) count += elementFreqMap.get(k-arr[i]);
+            else elementFreqMap.put(k-arr[i], elementFreqMap.getOrDefault(k-arr[i],0) + 1);
+        }
+        System.out.println("count = " + (count/2));
+    }
+    
+    public static void caseSort(String str){
+        // store all lower case chars into one string
+        // store all upper ones into another
+        // sort both
+        // while traversing the string,
+        // if char's case is upper, take from one
+        // else take from other
+
+        StringBuilder upper = new StringBuilder(), lower = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if(Character.isUpperCase(str.charAt(i))) upper.append(str.charAt(i));
+            else lower.append(str.charAt(i));
+        }
+
+        char[] upperC = upper.toString().toCharArray();
+        Arrays.sort(upperC);
+
+
+        char[] lowerC = lower.toString().toCharArray();
+        Arrays.sort(lowerC);
+
+        StringBuilder ans = new StringBuilder();
+
+        int j = 0,k =0;
+        for (int i = 0; i < str.length(); i++) {
+            if(Character.isUpperCase(str.charAt(i))) ans.append(upperC[j++]);
+            else ans.append(lowerC[k++]);
+        }
+
+        System.out.println("ans = " + ans);
+    }
+    
+    public static void minChangesToMakeSubstringsDistinct(String str){
+        // remove all dupes
+        // create a map of char vs freq
+        // while at the time of adding, if freq is not null
+        // count++
+
+        int n = str.length();
+        int count = 0;
+        HashMap<Character, Integer> map =new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if (map.get(str.charAt(i)) == null) map.put(str.charAt(i), 1);
+            else {
+                count++;
+                map.put(str.charAt(i), 1 + map.get(str.charAt(i)));
+            }
+        }
+
+        System.out.println("map = " + map);
+        System.out.println("count = " + count);
+    }
+    
+    public static void karatsuba(String a, String b){
+        Integer n1 = Integer.parseInt(a, 2);
+        Integer n2 = Integer.parseInt(b,2);
+
+        System.out.println(n1 * n2);
+    }
+
+    public static void pangramChecking(String str){
+        // check str length, if>=26,
+        // create a string containing all chars from a to z
+        // if given str's every char's index is > -1, then 1 else 0
+
+        int n = str.length();
+
+        str = str.replaceAll(", ", "").toLowerCase();
+        System.out.println("str = " + str);
+
+
+        if(n < 26) {
+            System.out.println(0);
+            return;
+        }
+
+        else {
+            String aToZ = "abcdefghijklmnopqrstuvwxyz";
+            for (int i = 0; i < aToZ.length(); i++) {
+                if(str.indexOf(aToZ.charAt(i)) == -1) {
+                    System.out.println("char not present: " + aToZ.charAt(i));
+                    System.out.println(0);
+                    return;
+                }
+            }
+
+            System.out.println(1);
+        }
+    }
+    
+    public static void orderingOfStrings(String str){
+        // two-pointer algo
+        // keep i at 0 & j at n-1
+        // whoever's value is less,inc/dec accordingly
+
+        int n = str.length();
+        str = str.toLowerCase();
+
+        String[] strArr = str.split(" ");
+
+        Arrays.sort(strArr);
+
+        System.out.println("start = " + strArr[0]);
+        System.out.println("end = " + strArr[strArr.length-1]);
+    }
+
+    public static void minIndexedString(String str, String pat){
+        // traverse through the pat to find index in str
+        // update the min
+        
+        int n = pat.length();
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            int b = str.indexOf(pat.charAt(i));
+            if(b != -1) min = Math.min(min, b);
+        }
+
+        System.out.println((min==Integer.MAX_VALUE) ? "no character present" : min);
+    }   
+
+    
     static class Height {
         int feet;
         int inches;

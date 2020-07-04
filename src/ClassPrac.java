@@ -2365,7 +2365,22 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("maxDiff = " + maxDiff);
     }
-    
+
+    public static void firstNonRepeatingCharacter(String str){
+        // if a char's first and last index is same, return that
+
+        int n = str.length();
+
+        for (int i = 0; i < n; i++) {
+            if(str.indexOf(str.charAt(i)) == str.lastIndexOf(str.charAt(i))) {
+                System.out.println(str.charAt(i));
+                return;
+            }
+        }
+
+        System.out.println(-1);
+    }
+
     static class Height {
         int feet;
         int inches;

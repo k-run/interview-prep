@@ -117,18 +117,31 @@ public class TemplateClass {
         for (int i = 0; i < tc; i++) {
             String a = br.readLine();
 
-            ClassPrac.firstNonRepeatingCharacter(a);
+            ClassPrac.reverseWordsInAString(a);
         }
     }
 
     public static void inputAsListOfList() throws IOException {
 
-        ClassPrac.leftView(Arrays.asList(7,5,3,6,2,1,11,11,6,13,6,6,12));
     }
+
+    public static void inputAsTcNMultiDArray() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String[] nm = br.readLine().split(" ");
+            int n = Integer.parseInt(nm[0]);
+            int m = Integer.parseInt(nm[1]);
+
+            ClassPrac.countAllWaysFromTopLeftToBottomRight(n, m);
+        }
+    }
+
     public static void main (String[] args) throws IOException
     {
         //code
-        inputAsListOfList();
+
+        inputAsTcNMultiDArray();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

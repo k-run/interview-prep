@@ -2431,7 +2431,32 @@ public class ClassPrac extends TemplateClass {
         System.out.println("res = " + res);
     }
 
+    public static void countAllWaysFromTopLeftToBottomRight(int n, int m){
+        // reach from top left to bottom right by either down or right
+        // number of ways to reach immediate right from origin is 1,take right
+        // number of ways to reach immediate down from origin is 1, take down
+        // rest, number of ways to reach any cell can only be from its immediate left
+        // taking right or immediate up taking down.
 
+
+        int[][] numberOfWays = new int[n][m];
+
+        for (int i = 0; i < n; i++) {
+            numberOfWays[i][0] = 1;
+        }
+
+        for (int i = 0; i < m; i++) {
+            numberOfWays[0][i] = 1;
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                numberOfWays[i][j] = numberOfWays[i-1][j] + numberOfWays[i][j-1];
+            }
+        }
+
+        System.out.println(numberOfWays[n-1][m-1]);
+    }
 
     static class Height {
         int feet;

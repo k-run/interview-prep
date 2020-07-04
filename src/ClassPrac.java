@@ -2409,6 +2409,27 @@ public class ClassPrac extends TemplateClass {
            }
         }
     }
+    
+    public static void reverseWordsInAString(String str){
+        // split on basis of dot
+        // store the ele in stack
+        // print the stack
+
+        int n = str.length();
+        String regex = "[.]";
+
+        String[] arr = str.split(regex);
+
+        StringBuilder res = new StringBuilder();
+
+        for (int i = arr.length-1; i > 0 ; i--) {
+            res.append(arr[i]).append(".");
+        }
+
+        res.append(arr[0]);
+
+        System.out.println("res = " + res);
+    }
 
 
 

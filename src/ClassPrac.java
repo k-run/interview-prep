@@ -2380,6 +2380,37 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println(-1);
     }
+    
+
+    public static void leftView(Node root){
+        // print only the first element of a level
+        // create a q of pair of node & level
+        // maintain a var for level
+        // if q's ele's level equals level then print
+
+
+        int level = 0;
+        Queue<Pair<Node, Integer>> q = new LinkedList<>();
+        q.add(new Pair<>(root, 0));
+
+        while(!q.isEmpty()) {
+           Pair<Node, Integer> ele = q.poll();
+           if(ele.getValue() == level) {
+               System.out.print(ele.getKey() + " ");
+               level++;
+           }
+
+           if(ele.getKey().left != null) {
+               q.add(new Pair<>(ele.getKey().left, level+1));
+           }
+
+           if(ele.getKey().right != null) {
+               q.add(new Pair<>(ele.getKey().right,level+1));
+           }
+        }
+    }
+
+
 
     static class Height {
         int feet;

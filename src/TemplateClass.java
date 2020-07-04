@@ -18,7 +18,7 @@ public class TemplateClass {
             for (int j = 0; j < n; j++) {
                 arr[j] = Integer.parseInt(str[j]);
             }
-            
+            ClassPrac.maximumDifference(arr);
         }
     }
     
@@ -35,7 +35,6 @@ public class TemplateClass {
                 arr[j] = Integer.parseInt(str[j]);
             }
 
-            ClassPrac.pairsWithASum(arr, k);
         }
 
     }
@@ -118,14 +117,18 @@ public class TemplateClass {
         for (int i = 0; i < tc; i++) {
             String a = br.readLine();
 
-            ClassPrac.caseSort(a);
+            ClassPrac.firstNonRepeatingCharacter(a);
         }
     }
 
+    public static void inputAsListOfList() throws IOException {
+
+        ClassPrac.leftView(Arrays.asList(7,5,3,6,2,1,11,11,6,13,6,6,12));
+    }
     public static void main (String[] args) throws IOException
     {
         //code
-        inputAsTcStrings();
+        inputAsListOfList();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

@@ -2458,6 +2458,27 @@ public class ClassPrac extends TemplateClass {
         System.out.println(numberOfWays[n-1][m-1]);
     }
 
+    public static void searchInAMatrix(int[][] arr, int k){
+        // all the rows and cols are sorted
+        // binary search row times
+
+
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
+            int[] s = arr[i];
+
+            List<Integer> list = Utils.getListFromIntArray(s);
+            int res = Collections.binarySearch(list, k);
+            if(res >= 0) {
+                System.out.println(1);
+                return;
+            }
+        }
+
+        System.out.println(0);
+    }
+
     static class Height {
         int feet;
         int inches;

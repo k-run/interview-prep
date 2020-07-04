@@ -133,7 +133,18 @@ public class TemplateClass {
             int n = Integer.parseInt(nm[0]);
             int m = Integer.parseInt(nm[1]);
 
-            ClassPrac.countAllWaysFromTopLeftToBottomRight(n, m);
+            String[] str = br.readLine().split(" ");
+            int[][] a = new int[n][m];
+
+            int idx = 0;
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < m; k++) {
+                    a[j][k] = Integer.parseInt(str[idx++]);
+                }
+            }
+
+            int k = Integer.parseInt(br.readLine());
+            ClassPrac.searchInAMatrix(a, k);
         }
     }
 

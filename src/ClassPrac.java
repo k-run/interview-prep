@@ -2479,6 +2479,38 @@ public class ClassPrac extends TemplateClass {
         System.out.println(0);
     }
 
+    public static void closestToK(int[] arr, int k){
+        // init diff as max value
+        // if n > 2, as arr is sorted, apply 2-pointer algo
+        // if k-arr[i]-arr[j] < diff, update diff
+        // if arr[i] + arr[j] < k, i++
+        // else j--
+
+        int n = arr.length;
+
+        int diff = Integer.MAX_VALUE;
+
+        int resI = arr[0], resJ = arr[n-1];
+
+        if(n > 2) {
+            int i = 0 , j = n-1;
+            while(i<j) {
+                if(Math.abs(k - (arr[i] + arr[j])) < diff) {
+                        diff = Math.abs(k - (arr[i] + arr[j]));
+                        resI = arr[i];
+                        resJ = arr[j];
+                }
+
+                if(arr[i] + arr[j] < k) i++;
+                else j--;
+            }
+        }
+
+        System.out.println("diff = " + diff);
+        System.out.println("resI = " + resI);
+        System.out.println("resJ = " + resJ);
+    }
+
     static class Height {
         int feet;
         int inches;

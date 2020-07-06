@@ -2544,7 +2544,35 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count = " + count);
     }
+    
+    public static void closingBracketIndex(String str, int opening){
+        // start from opening index, the first closing brace's index is the answer
+        int n = str.length();
+        Stack<Character> stack = new Stack<>();
 
+        int res = -1;
+
+        for (int i = opening; i < n; i++) {
+
+
+            if(str.charAt(i) == '[') stack.push(str.charAt(i));
+
+            if(str.charAt(i) == ']') {
+                    if(!stack.isEmpty()) {
+                        res = i;
+                        stack.pop();
+                        if (stack.isEmpty()) break;
+                    }
+                    else {
+                        res = i;
+                        break;
+                    }
+            }
+
+        }
+
+        System.out.println("res = " + res);
+    }
 
     static class Height {
         int feet;

@@ -162,4 +162,27 @@ public class Problems {
 
         return openingStack.isEmpty() && i >= n;
     }
+
+    public int strStr(String hs, String needle) {
+        // if needle is empty, return 0
+        // store the needle's length in len
+        // get substrings of size len from hs
+        // if the substring == needle, return i
+
+        int n = hs.length();
+
+        int len = needle.length();
+
+        if(len == 0) {
+            return 0;
+        }
+        for (int i = 0; i < n; i++) {
+            String subStr = hs.substring(i, (i+len) > n ? n : (i+len));
+            if(subStr.equals(needle)) {
+                return i;
+            }
+        }
+
+        return (-1);
+    }
 }

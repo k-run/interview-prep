@@ -2532,6 +2532,20 @@ public class ClassPrac extends TemplateClass {
         System.out.print(bigInteger.divide(bigInteger1));
     }
 
+    public static void theCountingGame(String str){
+        // Done
+        // if a char is uppercase, count++
+        int count = 1;
+
+        int n = str.length();
+        for (int i = 0; i < n; i++) {
+            if(Character.isUpperCase(str.charAt(i))) count++;
+        }
+
+        System.out.println("count = " + count);
+    }
+
+
     static class Height {
         int feet;
         int inches;

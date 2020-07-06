@@ -185,4 +185,21 @@ public class Problems {
 
         return (-1);
     }
+
+    public static int searchInsertPosition(int[] arr, int k){
+        // return k's position in arr, if found
+        // else the suitable one if it was present
+
+        int n = arr.length;
+        int l = 0, h = n-1;
+
+        while(l<=h) {
+            int m = (l+h)/2;
+            if(arr[m]==k) return m;
+            if(arr[m] > k) h = m - 1;
+            else l = m + 1;
+        }
+
+        return l;
+    }
 }

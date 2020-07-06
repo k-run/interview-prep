@@ -2524,6 +2524,13 @@ public class ClassPrac extends TemplateClass {
         return true;
     }
 
+    public static void largeNumberDivision(String a, String b){
+        // divide a by b, convert a to bigint
+        // done
+        BigInteger  bigInteger = new BigInteger(a);
+        BigInteger bigInteger1 = new BigInteger(b);
+        System.out.print(bigInteger.divide(bigInteger1));
+    }
 
     static class Height {
         int feet;

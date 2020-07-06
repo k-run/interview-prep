@@ -18,7 +18,7 @@ public class TemplateClass {
             for (int j = 0; j < n; j++) {
                 arr[j] = Integer.parseInt(str[j]);
             }
-            ClassPrac.maximumDifference(arr);
+
         }
     }
     
@@ -46,7 +46,8 @@ public class TemplateClass {
             String a = br.readLine();
             String b = br.readLine();
 
-            ClassPrac.countOccurencesOfAnagrams(a, b);
+            ArrayList<String> list = new ArrayList<>(Utils.getListFromStringArray(a.split(" ")));
+            ClassPrac.matchSpecificPattern(list, b);
         }
     }
     
@@ -93,7 +94,7 @@ public class TemplateClass {
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
             int n = Integer.parseInt(br.readLine());
-            ClassPrac.isFibonacci(n);
+
         }
     }
     
@@ -116,8 +117,7 @@ public class TemplateClass {
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
             String a = br.readLine();
-
-            ClassPrac.reverseWordsInAString(a);
+            System.out.println(ClassPrac.isIsogram(a));
         }
     }
 
@@ -133,26 +133,43 @@ public class TemplateClass {
             int n = Integer.parseInt(nm[0]);
             int m = Integer.parseInt(nm[1]);
 
-            String[] str = br.readLine().split(" ");
-            int[][] a = new int[n][m];
+//            String[] str = br.readLine().split(" ");
+//            int[][] a = new int[n][m];
+//
+//            int idx = 0;
+//            for (int j = 0; j < n; j++) {
+//                for (int k = 0; k < m; k++) {
+//                    a[j][k] = Integer.parseInt(str[idx++]);
+//                }
+//            }
+//
+//            int k = Integer.parseInt(br.readLine());
+            int[][] arr = new int[n][m];
+            List<List<String>> lists = new ArrayList<>();
 
-            int idx = 0;
+            for (int j = 0; j < n; j++) {
+                String[] s = br.readLine().split(" ");
+                lists.add(Utils.getListFromStringArray(s));
+            }
+
+            //System.out.println("lists = " + lists);
+
+
             for (int j = 0; j < n; j++) {
                 for (int k = 0; k < m; k++) {
-                    a[j][k] = Integer.parseInt(str[idx++]);
+                    arr[j][k] = Integer.parseInt(lists.get(j).get(k));
                 }
             }
 
-            int k = Integer.parseInt(br.readLine());
-            ClassPrac.searchInAMatrix(a, k);
+            ClassPrac.booleanMatrixProblem(arr);
+
         }
     }
 
     public static void main (String[] args) throws IOException
     {
         //code
-
-        inputAsTcNMultiDArray();
+       inputAsTcStrings();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

@@ -3,6 +3,7 @@ import javafx.util.Pair;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -2382,7 +2383,7 @@ public class ClassPrac extends TemplateClass {
     }
     
 
-    public static void leftView(Node root){
+    public static void leftView(RightNode root){
         // print only the first element of a level
         // create a q of pair of node & level
         // maintain a var for level
@@ -2390,11 +2391,11 @@ public class ClassPrac extends TemplateClass {
 
 
         int level = 0;
-        Queue<Pair<Node, Integer>> q = new LinkedList<>();
+        Queue<Pair<RightNode, Integer>> q = new LinkedList<>();
         q.add(new Pair<>(root, 0));
 
         while(!q.isEmpty()) {
-           Pair<Node, Integer> ele = q.poll();
+           Pair<RightNode, Integer> ele = q.poll();
            if(ele.getValue() == level) {
                System.out.print(ele.getKey() + " ");
                level++;
@@ -2511,6 +2512,19 @@ public class ClassPrac extends TemplateClass {
         System.out.println("resJ = " + resJ);
     }
 
+    public static boolean isIsogram(String str){
+        // done
+        // if any char's last index & first index is not same, return false
+        int n = str.length();
+
+        for (int i = 0; i < n; i++) {
+            if(str.indexOf(str.charAt(i)) != str.lastIndexOf(str.charAt(i))) return false;
+        }
+
+        return true;
+    }
+
+
     static class Height {
         int feet;
         int inches;
@@ -2521,6 +2535,29 @@ public class ClassPrac extends TemplateClass {
         }
     }
 
+    static class MyPair{
+        RightNode rightNode;
+        Integer level;
 
+        public MyPair(RightNode rightNode, Integer level) {
+            this.rightNode = rightNode;
+            this.level = level;
+        }
+    }
+
+    class RightNode {
+        int data;
+        RightNode left;
+        RightNode right;
+        RightNode nextRight;
+        RightNode(int data){
+            this.data = data;
+            left=null;
+            right=null;
+            nextRight = null;
+        }
+    }
 }
+
+
 

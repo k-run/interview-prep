@@ -9,6 +9,10 @@ public class Utils {
         return Arrays.stream(a).boxed().collect(Collectors.toList());
     }
 
+    public static List<String> getListFromStringArray(String[] a){
+        return Arrays.stream(a).collect(Collectors.toList());
+    }
+
     public static HashMap<Integer,Integer> getIntKeyFreqMap(int[] arr) {
         HashMap<Integer, Integer> elementFreqMap = new HashMap<>();
         int n =arr.length;

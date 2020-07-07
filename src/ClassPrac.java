@@ -2574,6 +2574,24 @@ public class ClassPrac extends TemplateClass {
         System.out.println("res = " + res);
     }
 
+    public static int maxAndMinDivideAndConquer(int[] arr, int l, int h){
+        // break the arr into 2 halves
+        // if l > h, return the max and min of them
+
+        if (l < h) {
+//          Divide
+            int m = (l+h)/2;
+            int maxLeft = maxAndMinDivideAndConquer(arr, l, m);
+            int maxRight = maxAndMinDivideAndConquer(arr, m+1, h);
+//          Combine
+            return Math.min(maxLeft, maxRight);
+        }
+
+//      Conquer
+        int max = Math.min(arr[l], arr[h]);
+        return max;
+    }
+
     static class Height {
         int feet;
         int inches;

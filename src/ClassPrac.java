@@ -2592,6 +2592,56 @@ public class ClassPrac extends TemplateClass {
         return max;
     }
 
+    public static int inversionCount(int[] arr, int l, int r){
+        // count from left subarr + right subarr + merging count
+        // during merge, if left's ele > right ele, all elements between them
+        // will also follow the same property. Hence, the number of counts
+        // will be mid - i
+
+        int count = 0;
+
+        if(l < r) {
+            int m = (l+r)/2;
+
+            count += inversionCount(arr, l,m);
+            count += inversionCount(arr, m+1, r);
+
+            count += mergeCount(arr, l,m ,r);
+        }
+
+        return count;
+    }
+
+    public static int mergeCount(int[] arr, int l, int m, int r){
+        // if left subarr's ele > right ele, update count as m - i
+
+        int[] L = Arrays.copyOfRange(arr, l, m+1);
+        int[] R = Arrays.copyOfRange(arr, m+1, r+1);
+
+        int n1 = L.length;
+        int n2 = R.length;
+
+        int count = 0;
+
+        int i = 0, j = 0, k = l;
+        while(i< n1 && j<n2) {
+
+            if(L[i] > R[j]) {
+                arr[k++] = R[j++];
+                count += (m + 1) - (l + i);
+            }
+
+            else {
+                arr[k++] = L[i++];
+            }
+        }
+
+        while (i < n1) arr[k++] = L[i++];
+        while (j < n2) arr[k++] = R[j++];
+
+        return count;
+    }
+
     static class Height {
         int feet;
         int inches;

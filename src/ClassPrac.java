@@ -2642,6 +2642,38 @@ public class ClassPrac extends TemplateClass {
         return count;
     }
 
+    public static void countOccurrencesOfAnagram(String a, String b){
+        // create a hashmap for b's char vs freq
+        // take substrings of a of b's len
+        // create a hashmap of these substrings' char vs freq
+        // if both maps are equal, then count++
+
+        int n = a.length();
+        int len = b.length();
+        int count = 0;
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            map.put(b.charAt(i), map.getOrDefault(b.charAt(i),0) + 1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            String sub = a.substring(i, (i+len) > n ? n : (i+len));
+            int j;
+            HashMap<Character, Integer> map1 = new HashMap<>();
+
+            for (j = 0; j < sub.length(); j++) {
+                map1.put(sub.charAt(j), map1.getOrDefault(sub.charAt(j), 0) + 1);
+            }
+
+            System.out.println("map1 = " + map1);
+
+            if(map.equals(map1)) count++;
+        }
+
+        System.out.println("count = " + count);
+    }
+
     static class Height {
         int feet;
         int inches;

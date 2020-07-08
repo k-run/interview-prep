@@ -2694,6 +2694,25 @@ public class ClassPrac extends TemplateClass {
         }
     }
 
+   public static void kadanesAlgo(int[] arr){
+        // ans will be global sum
+       // sum will be local sum
+       // if sum > ans, update ans
+       // reset sum if sum < 0
+       // Q: What if all ele are -ve
+
+       int n = arr.length;
+       int sum = 0, ans = Integer.MIN_VALUE;
+
+       for (int i = 0; i <n ; i++) {
+           sum += arr[i];
+           if(sum > ans) ans = sum;
+           if(sum < 0) sum = 0;
+       }
+
+       System.out.println("ans = " + ans);
+   }
+
     class RightNode {
         int data;
         RightNode left;

@@ -2749,6 +2749,28 @@ public class ClassPrac extends TemplateClass {
 
        System.out.println("ans = " + ans);
    }
+   
+   public static void additionOfSubMatrix(int[][] arr, MyPoint start, MyPoint end){
+        // run a loop from start to end and all the elements
+
+       int sum = 0;
+
+       int n = arr.length;
+       int m = arr[0].length;
+
+       System.out.println("x1 " + start.x1 + " y1 " + start.y1);
+       System.out.println("x2 " + end.x1 + " y2 " + end.y1);
+
+       for (int i = start.x1-1; i < end.x1; i++) {
+           for (int j = start.y1-1; j < end.y1; j++) {
+               System.out.println(arr[i][j]);
+                sum += arr[i][j];
+           }
+       }
+
+       System.out.println("sum = " + sum);
+   }
+
 
     class RightNode {
         int data;

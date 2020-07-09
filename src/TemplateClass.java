@@ -19,6 +19,7 @@ public class TemplateClass {
                 arr[j] = Integer.parseInt(str[j]);
             }
 
+            ClassPrac.maxDistanceBetweenSameElements(arr);
         }
     }
     
@@ -47,7 +48,7 @@ public class TemplateClass {
             String b = br.readLine();
 
             ArrayList<String> list = new ArrayList<>(Utils.getListFromStringArray(a.split(" ")));
-            ClassPrac.matchSpecificPattern(list, b);
+            //ClassPrac.matchSpecificPattern(list, b);
         }
     }
     
@@ -133,35 +134,45 @@ public class TemplateClass {
             int n = Integer.parseInt(nm[0]);
             int m = Integer.parseInt(nm[1]);
 
-//            String[] str = br.readLine().split(" ");
-//            int[][] a = new int[n][m];
-//
-//            int idx = 0;
-//            for (int j = 0; j < n; j++) {
-//                for (int k = 0; k < m; k++) {
-//                    a[j][k] = Integer.parseInt(str[idx++]);
-//                }
-//            }
-//
-//            int k = Integer.parseInt(br.readLine());
-            int[][] arr = new int[n][m];
-            List<List<String>> lists = new ArrayList<>();
+            String[] str = br.readLine().split(" ");
+            int[][] a = new int[n][m];
 
-            for (int j = 0; j < n; j++) {
-                String[] s = br.readLine().split(" ");
-                lists.add(Utils.getListFromStringArray(s));
-            }
-
-            //System.out.println("lists = " + lists);
-
-
+            int idx = 0;
             for (int j = 0; j < n; j++) {
                 for (int k = 0; k < m; k++) {
-                    arr[j][k] = Integer.parseInt(lists.get(j).get(k));
+                    a[j][k] = Integer.parseInt(str[idx++]);
                 }
             }
 
-            ClassPrac.booleanMatrixProblem(arr);
+            String[] startEnd = br.readLine().split(" ");
+            int x1 = Integer.parseInt(startEnd[0]);
+            int y1 = Integer.parseInt(startEnd[1]);
+
+            int x2 = Integer.parseInt(startEnd[2]);
+            int y2 = Integer.parseInt(startEnd[3]);
+
+           MyPoint myPoint = new MyPoint(x1, y1);
+           MyPoint myPoint1 = new MyPoint(x2, y2);
+           ClassPrac.additionOfSubMatrix(a, myPoint, myPoint1);
+
+//            int[][] arr = new int[n][m];
+//            List<List<String>> lists = new ArrayList<>();
+//
+//            for (int j = 0; j < n; j++) {
+//                String[] s = br.readLine().split(" ");
+//                lists.add(Utils.getListFromStringArray(s));
+//            }
+//
+//            //System.out.println("lists = " + lists);
+//
+//
+//            for (int j = 0; j < n; j++) {
+//                for (int k = 0; k < m; k++) {
+//                    arr[j][k] = Integer.parseInt(lists.get(j).get(k));
+//                }
+//            }
+
+            //ClassPrac.booleanMatrixProblem(arr);
 
         }
     }
@@ -169,7 +180,7 @@ public class TemplateClass {
     public static void main (String[] args) throws IOException
     {
         //code
-       inputAsTcStrings();
+        inputAsTcNMultiDArray();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

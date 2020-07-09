@@ -2712,6 +2712,43 @@ public class ClassPrac extends TemplateClass {
 
        System.out.println("ans = " + ans);
    }
+    
+   public static void maxDistanceBetweenSameElements(int[] arr){
+        // create a hasmap of arr ele vs list of indices
+        // scan through the map, if list's size > 1,
+       // update ans with diff of list's first and last ele
+
+       int n = arr.length;
+       HashMap<Integer, List<Integer>> map = new HashMap<>();
+
+       for (int i = 0; i < n; i++) {
+           List<Integer> list;
+           if(map.containsKey(arr[i])) {
+               list = map.get(arr[i]);
+               list.add(i);
+           }
+
+           else {
+               list = new ArrayList<>();
+               list.add(i);
+           }
+
+           map.put(arr[i],list);
+       }
+
+       int ans = 0;
+
+       System.out.println("map = " + map);
+
+       for(Map.Entry<Integer, List<Integer>> entry: map.entrySet()) {
+           List<Integer> list = entry.getValue();
+           if(list.size() > 1) {
+               ans = Math.max(ans, list.get(list.size()-1) - list.get(0));
+           }
+       }
+
+       System.out.println("ans = " + ans);
+   }
 
     class RightNode {
         int data;

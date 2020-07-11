@@ -1,4 +1,5 @@
 import javafx.util.Pair;
+import sun.plugin.javascript.navig4.Link;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -2771,6 +2772,67 @@ public class ClassPrac extends TemplateClass {
        System.out.println("sum = " + sum);
    }
 
+
+    public static void nutsAndBolts(String[] a, String[] b){
+        // create 2 maps, one for symbol -> num and
+        // other for num -> sym
+        // sort one array and create a map for other
+        // with key as ele and val as true
+
+        // traverse the sorted array and if it's ele
+        // is present in map, print
+
+        int n = a.length;
+        LinkedHashMap<String, Integer> orderStringToIntMap = new LinkedHashMap<>();
+        orderStringToIntMap.put("!", 1);
+        orderStringToIntMap.put("#", 2);
+        orderStringToIntMap.put("$", 3);
+        orderStringToIntMap.put("%", 4);
+        orderStringToIntMap.put("&", 5);
+        orderStringToIntMap.put("*", 6);
+        orderStringToIntMap.put("@", 7);
+        orderStringToIntMap.put("^", 8);
+        orderStringToIntMap.put("~", 9);
+
+        LinkedHashMap<Integer, String> orderIntToStringMap = new LinkedHashMap<>();
+
+        orderIntToStringMap.put(1,"!");
+        orderIntToStringMap.put(2, "#");
+        orderIntToStringMap.put(3, "$");
+        orderIntToStringMap.put(4,"%");
+        orderIntToStringMap.put(5,"&");
+        orderIntToStringMap.put(6,"*");
+        orderIntToStringMap.put(7,"@");
+        orderIntToStringMap.put(8,"^");
+        orderIntToStringMap.put(9,"~");
+
+        int[] a1 = new int[a.length];
+        int[] a2 = new int[b.length];
+
+        for (int i = 0; i < n; i++) {
+            a1[i] = orderStringToIntMap.get(a[i]);
+            a2[i] = orderStringToIntMap.get(b[i]);
+        }
+
+        Arrays.sort(a1);
+        TreeMap<Integer, Boolean> map = new TreeMap<>();
+
+        for (int i = 0; i < n; i++) {
+            map.put(a2[i],true);
+        }
+
+        StringBuilder res1 = new StringBuilder(), res2 = new StringBuilder();
+
+        for (int i = 0; i < n; i++) {
+            if(map.containsKey(a1[i])) {
+                res1.append(orderIntToStringMap.get(a1[i])).append(" ");
+                res2.append(orderIntToStringMap.get(a1[i])).append(" ");
+            }
+        }
+
+        System.out.println(res1);
+        System.out.println(res2);
+    }
 
     class RightNode {
         int data;

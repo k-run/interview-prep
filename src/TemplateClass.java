@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TemplateClass {
@@ -13,13 +14,14 @@ public class TemplateClass {
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
             int n = Integer.parseInt(br.readLine());
+            Stack<Integer> stack = new Stack<>();
             int[] arr = new int[n];
             String[] str = br.readLine().split(" ");
             for (int j = 0; j < n; j++) {
                 arr[j] = Integer.parseInt(str[j]);
+                stack.push(arr[j]);
             }
 
-            ClassPrac.maxDistanceBetweenSameElements(arr);
         }
     }
     
@@ -47,8 +49,9 @@ public class TemplateClass {
             String a = br.readLine();
             String b = br.readLine();
 
-            ArrayList<String> list = new ArrayList<>(Utils.getListFromStringArray(a.split(" ")));
-            //ClassPrac.matchSpecificPattern(list, b);
+            //ArrayList<String> list = new ArrayList<>(Utils.getListFromStringArray(a.split(" ")));
+            //ClassPrac.findLargestWordInADict(a.split(","), b);
+            ClassPrac.nutsAndBolts(a.split(" "), b.split(" "));
         }
     }
     
@@ -118,7 +121,7 @@ public class TemplateClass {
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
             String a = br.readLine();
-            System.out.println(ClassPrac.isIsogram(a));
+
         }
     }
 
@@ -177,10 +180,49 @@ public class TemplateClass {
         }
     }
 
+    public static void inputAsTcNKList() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String[] nk = br.readLine().split(" ");
+            int n = Integer.parseInt(nk[0]);
+            int k = Integer.parseInt(nk[1]);
+
+            List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+
+            ClassPrac.threeWayPartitioning(list, n, k);
+        }
+
+    }
+
+    public static void inputAsTcNListAB() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            int n = Integer.parseInt(br.readLine());
+            ArrayList<Integer> list = new ArrayList<>();
+            String[] nk = br.readLine().split(" ");
+
+            for (int j = 0; j < n; j++) {
+                list.add(Integer.parseInt(nk[j]));
+            }
+
+            String[] ab = br.readLine().split(" ");
+
+            int a = Integer.parseInt(ab[0]);
+            int b = Integer.parseInt(ab[1]);
+
+            //List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+
+            ClassPrac.threeWayPartitioning(list, a, b);
+        }
+
+    }
+
     public static void main (String[] args) throws IOException
     {
         //code
-        inputAsTcNMultiDArray();
+        inputAsTc2Strings();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

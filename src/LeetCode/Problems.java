@@ -202,4 +202,21 @@ public class Problems {
 
         return l;
     }
+
+    public static int climbingStairs(int n){
+        // every step can be climbed only by combo of 1 or 2 steps
+        // step 1 from base can be climbed only in 1 way
+        // step 2 from base can be climbed in 2 ways
+        // rest, steps are dependent on previous steps
+
+        int[] arr = new int[n+2];
+        arr[1] = 1;
+        arr[2] = 2;
+
+        for (int i = 3; i <= n; i++) {
+            arr[i] = arr[i-1] + arr[i-2];
+        }
+
+        return arr[n];
+    }
 }

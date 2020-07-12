@@ -2834,6 +2834,19 @@ public class ClassPrac extends TemplateClass {
         System.out.println(res2);
     }
 
+    public static void removeDup(String string){
+        // if fitst index and last index are same, append it into resultant
+        int n = string.length();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < n; i++) {
+            if(stringBuilder.toString().indexOf(string.charAt(i)) == -1) {
+                stringBuilder.append(string.charAt(i));
+            }
+        }
+        System.out.println(stringBuilder);
+    }
+
     class RightNode {
         int data;
         RightNode left;

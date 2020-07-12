@@ -2847,6 +2847,27 @@ public class ClassPrac extends TemplateClass {
         System.out.println(stringBuilder);
     }
 
+    public static void groupAnagrams(String[] arr){
+        // sort the strings
+        // create a map of string vs freq
+        // print in sorted order of values
+
+        int n = arr.length;
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for(String s: arr) {
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+
+            map.put(new String(chars), map.getOrDefault(new String(chars), 0) + 1);
+        }
+
+        map.values()
+                .stream()
+                .sorted(Comparator.naturalOrder())
+                .forEach(e -> System.out.print(e + " "));
+    }
+
     class RightNode {
         int data;
         RightNode left;

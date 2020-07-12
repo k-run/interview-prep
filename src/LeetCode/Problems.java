@@ -219,4 +219,34 @@ public class Problems {
 
         return arr[n];
     }
+
+
+    public Node deleteDuplicates(Node head) {
+        // 2-pointer algorithm
+        // keep one ptr at head, acc and run other till
+        // both are not equal.
+        // change acc's next to runn
+        // increment both runn and acc
+
+        Node ptr = head, ptr2;
+        if(head == null) return null;
+
+        while(ptr != null) {
+            ptr2 = ptr.next;
+            while(ptr2!=null && ptr2.val == ptr.val) ptr2 = ptr2.next;
+            ptr.next = ptr2;
+            ptr = ptr2;
+        }
+
+        return head;
+    }
+
+    public class Node {
+        int val;
+        Node next;
+        Node() {}
+        Node(int val) { this.val = val; }
+        Node(int val, Node next) { this.val = val; this.next = next; }
+    }
+
 }

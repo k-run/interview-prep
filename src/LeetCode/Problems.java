@@ -241,6 +241,16 @@ public class Problems {
         return head;
     }
 
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        // return p's data == q's data & left and right subtree
+        // are also equal
+        if(p == null && q==null) return true;
+        if(p==null || q==null) return false;
+
+        return (p.val == q.val && isSameTree(p.left, q.left)
+                && isSameTree(p.right, q.right));
+    }
+
     public class Node {
         int val;
         Node next;
@@ -249,4 +259,16 @@ public class Problems {
         Node(int val, Node next) { this.val = val; this.next = next; }
     }
 
+    public class TreeNode {
+      int val;
+     TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+         this.right = right;
+      }
+  }
 }

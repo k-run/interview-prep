@@ -2888,6 +2888,22 @@ public class ClassPrac extends TemplateClass {
         System.out.println("count = " + count);
     }
 
+    public static void patternPrinting(int n){
+        // till n > 0, recursively call the function
+        // once n < 0, return
+        if(n < 0) {
+            System.out.print(n + " ");
+            return;
+        }
+
+        if(n > 0) {
+            System.out.print(n + " ");
+            patternPrinting(n-5);
+        }
+
+        System.out.print(n + " ");
+    }
+
     class RightNode {
         int data;
         RightNode left;

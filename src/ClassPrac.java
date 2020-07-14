@@ -2868,6 +2868,26 @@ public class ClassPrac extends TemplateClass {
                 .forEach(e -> System.out.print(e + " "));
     }
 
+    public static void distinctSubstring(String string){
+        // take substrings of length 2
+        // check if the resultant string contains it or not
+        // if not, count++
+
+        int n = string.length(), count = 0;
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < n-1; i++) {
+            String sub = string.substring(i, i+2);
+            if(!list.contains(sub)) {
+                count++;
+                list.add(sub);
+            }
+
+        }
+
+        System.out.println("count = " + count);
+    }
+
     class RightNode {
         int data;
         RightNode left;

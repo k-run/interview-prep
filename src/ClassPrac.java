@@ -2904,6 +2904,41 @@ public class ClassPrac extends TemplateClass {
         System.out.print(n + " ");
     }
 
+    public static void maximumDifferenceIndices(int[] arr){
+        // create a map of integer vs list of indices
+        // traverse entries and update max
+
+        int n = arr.length;
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            List<Integer> index;
+
+            if(map.containsKey(arr[i])) {
+                index = map.get(arr[i]);
+                index.add(i);
+            }
+
+            else {
+                index = new ArrayList<>();
+                index.add(i);
+            }
+
+            map.put(arr[i],index);
+        }
+
+        int max = 0;
+
+        for(Map.Entry<Integer , List<Integer>> entry: map.entrySet()) {
+            if(entry.getValue().size() > 1) {
+                List<Integer> liost = entry.getValue();
+                max = Math.max(max, liost.get(liost.size()-1) - liost.get(0));
+            }
+        }
+
+        System.out.println("max = " + max);
+    }
+
     class RightNode {
         int data;
         RightNode left;

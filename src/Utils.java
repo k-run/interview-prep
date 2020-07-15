@@ -37,6 +37,15 @@ public class Utils {
         }
     }
 
+    public static void printInt2DArray(int[][] a){
+        for(int[] aa: a) {
+            for(int x: aa) {
+                System.out.print(x + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static void printIntArray(int[] arr){
         Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
     }

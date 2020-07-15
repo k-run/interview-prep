@@ -2938,6 +2938,48 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("max = " + max);
     }
+    
+    public static void booleanMatrix(int[][] arr){
+        // traverse once through the arr to find the row and col of 1's
+        // store them in a map
+        // map - key 1 - value - row,col
+        // traverse through the map to fill all cells in that row as 1
+        // and all cells in that col as 1
+        
+        int n = arr.length;
+        int m = arr[0].length;
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if(arr[i][j] == 1) {
+                    map.put(i, j);
+                }
+            }
+        }
+
+        System.out.println("map = " + map);
+
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()) {
+            dfsTraversal(arr, entry.getKey(), entry.getValue(), n, m);
+        }
+
+        Utils.printInt2DArray(arr);
+    }
+
+    public static void dfsTraversal(int[][]arr, int r, int c, int n, int m){
+        // check for boundary conditions
+        if(r < 0 || r == n || c < 0 || c == m) return;
+
+        for (int i = 0; i < n; i++) {
+            arr[i][c] = 1;
+        }
+
+        for (int j = 0; j < m; j++) {
+            arr[r][j] = 1;
+        }
+    }
 
     class RightNode {
         int data;

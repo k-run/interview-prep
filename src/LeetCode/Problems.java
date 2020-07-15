@@ -251,6 +251,17 @@ public class Problems {
                 && isSameTree(p.right, q.right));
     }
 
+    public static int maxDepthOfBinaryTree(TreeNode root){
+        // ans would be 1 + max(left height, right height)
+        // base case: root == null, return 0
+
+        if(root == null) return 0;
+        int l_h = maxDepthOfBinaryTree(root.left);
+        int r_h = maxDepthOfBinaryTree(root.right);
+
+        return 1 + Math.max(l_h ,r_h);
+    }
+
     public class Node {
         int val;
         Node next;

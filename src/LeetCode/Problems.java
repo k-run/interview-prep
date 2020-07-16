@@ -261,6 +261,23 @@ public class Problems {
 
         return 1 + Math.max(l_h ,r_h);
     }
+    
+    public static void twoSum2(int[] arr, int k){
+        // the array is sorted
+        // 2-pointer algorithm
+
+        int n = arr.length, i = 0,j = n-1;
+
+        while (i < j) {
+            if(arr[i] + arr[j] == k) {
+                System.out.println((i+1) + " " + (j+1));
+                return;
+            }
+
+            else if(arr[i] + arr[j] > k) j--;
+            else i++;
+        }
+    }
 
     public class Node {
         int val;

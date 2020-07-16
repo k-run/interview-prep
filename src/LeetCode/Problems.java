@@ -1,5 +1,7 @@
 package LeetCode;
 
+import javax.rmi.CORBA.Util;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -277,6 +279,25 @@ public class Problems {
             else if(arr[i] + arr[j] > k) j--;
             else i++;
         }
+    }
+
+    public static void rotateOnRight(int[] arr, int k){
+        // for the first k elements in reverse way from right
+        // store the element in temp
+        // move all the elements from 0 to n towards right
+        // put the temp into the first place
+
+        int n = arr.length;
+        while (k-- > 0) {
+            int temp = arr[n - 1];
+            for (int j = n-2; j >= 0; j--) {
+                arr[j + 1] = arr[j];
+            }
+
+            arr[0] = temp;
+        }
+
+        Arrays.stream(arr).forEach(e-> System.out.print(e + " "));
     }
 
     public class Node {

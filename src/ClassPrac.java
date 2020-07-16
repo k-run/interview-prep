@@ -2981,6 +2981,33 @@ public class ClassPrac extends TemplateClass {
         }
     }
 
+    public static void countSetAndNonSetBits(int n){
+        // count set bits by doing n&n-1 till n becomes 0
+        // the count is the count of number of 1s
+        // the total number of bits is right shift
+
+        int total = 0;
+
+        int countOfSet = 0;
+        int dummyN = n;
+
+        while(n!=0) {
+            n &= (n-1);
+            countOfSet++;
+        }
+
+        System.out.println("countOfSet = " + countOfSet);
+
+        while (dummyN != 0) {
+            dummyN = dummyN >> 1;
+            total++;
+        }
+
+        System.out.println("total = " + total);
+
+        System.out.println("count of not set = " + (total - countOfSet));
+    }
+
     class RightNode {
         int data;
         RightNode left;

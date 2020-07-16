@@ -3034,6 +3034,19 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count = " + count);
     }
+    
+    public static void aryaAndTheGreatWar(int n){
+        // count the number of set bits
+
+        int count = 0;
+
+        while (n!=0) {
+            n &= (n-1);
+            count++;
+        }
+
+        System.out.println("count = " + count);
+    }
 
     class RightNode {
         int data;

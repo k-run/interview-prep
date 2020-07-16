@@ -3007,6 +3007,33 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("count of not set = " + (total - countOfSet));
     }
+    
+    public static void collectingTrees(int n){
+        // while n != 0
+        // get the closest value to n in terms of 2^i
+        // subtract n
+        // update count
+
+        int count = 0;
+
+        while (n > 0) {
+
+            int btValue = 1;
+
+            while (btValue << 1 <= n) {
+                btValue = btValue << 1;
+            }
+
+            System.out.println("btValue = " + btValue);
+
+            n -= btValue;
+            System.out.println("n = " + n);
+
+            count++;
+        }
+
+        System.out.println("count = " + count);
+    }
 
     class RightNode {
         int data;

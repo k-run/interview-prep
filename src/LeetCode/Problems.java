@@ -411,46 +411,46 @@ public class Problems {
     
     public static void numberOfGoodPairs(int[] arr){
         int n = arr.length;
-//
-//        int count = 0;
-//
-//        for (int i = 0; i < n; i++) {
-//            for (int j = i+1; j < n; j++) {
-//                if(arr[i] == arr[j]) count++;
-//            }
-//        }
+
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                if(arr[i] == arr[j]) count++;
+            }
+        }
 
         // create a map of int ele vs list of indices
         // scan through the values', if size > 1,
         // update count as n*n+1/4
 
-        HashMap<Integer, List<Integer>> map = new HashMap<>();
-
-        for (int i = 0; i < n; i++) {
-            List<Integer> list;
-            if(map.containsKey(arr[i])) {
-                list = map.get(arr[i]);
-                list.add(i);
-            }
-
-            else {
-                list = new ArrayList<>();
-                list.add(i);
-            }
-
-            map.put(arr[i], list);
-        }
-
-        System.out.println("map = " + map);
-
-        int count = 0;
-
-        for (List<Integer> lisy: map.values()) {
-            if(lisy.size() > 1) {
-               int s = lisy.size();
-               count += (s * (s-1))/2;
-            }
-        }
+//        HashMap<Integer, List<Integer>> map = new HashMap<>();
+//
+//        for (int i = 0; i < n; i++) {
+//            List<Integer> list;
+//            if(map.containsKey(arr[i])) {
+//                list = map.get(arr[i]);
+//                list.add(i);
+//            }
+//
+//            else {
+//                list = new ArrayList<>();
+//                list.add(i);
+//            }
+//
+//            map.put(arr[i], list);
+//        }
+//
+//        System.out.println("map = " + map);
+//
+//        int count = 0;
+//
+//        for (List<Integer> lisy: map.values()) {
+//            if(lisy.size() > 1) {
+//               int s = lisy.size();
+//               count += (s * (s-1))/2;
+//            }
+//        }
 
         System.out.println("count = " + (count));
     }

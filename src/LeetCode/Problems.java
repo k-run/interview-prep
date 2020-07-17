@@ -1,9 +1,7 @@
 package LeetCode;
 
 import javax.rmi.CORBA.Util;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class Problems {
     public static void twoSum(int[] arr, int k) {
@@ -298,6 +296,44 @@ public class Problems {
         }
 
         Arrays.stream(arr).forEach(e-> System.out.print(e + " "));
+    }
+    
+    public static void containsDuplicate(int[] arr, int k){
+        // create a map of elements vs list of their indices
+        // if difference between any of 2 list values is <= k, return true
+
+        int n = arr.length;
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            List<Integer> list;
+            if (map.containsKey(arr[i])) {
+                list = map.get(arr[i]);
+                list.add(i);
+            }
+
+            else {
+                list = new ArrayList<>();
+                list.add(i);
+            }
+
+            map.put(arr[i], list);
+        }
+
+        System.out.println("map = " + map);
+
+        for(List<Integer> list : map.values()) {
+            if(list.size() > 1) {
+                for (int i = 0; i < list.size() - 1; i++) {
+                    if(list.get(i+1) - list.get(i) <= k) {
+                        System.out.println(true);
+                        return;
+                    }
+                }
+            }
+        }
+
+        System.out.println(false);
     }
 
     public class Node {

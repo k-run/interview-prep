@@ -383,6 +383,31 @@ public class Problems {
 
         Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
     }
+    
+    
+    public static void findAllDisappearedNumbers(int[] arr){
+        // create a boolean arr visited to check if a number has been
+        // the indices which are false are the unvisited
+
+        int n = arr.length;
+
+        boolean[] visited = new boolean[n+1];
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int ele = arr[i];
+            visited[ele] = true;
+        }
+
+        //Arrays.stream(visited).forEach(e -> System.out.print(e + " "));
+
+        for (int i = 0; i < visited.length; i++) {
+            //System.out.print(visited[i] + " ");
+            if(!visited[i] && i>0) list.add(i);
+        }
+
+        System.out.println("list = " + list);
+    }
 
     public class Node {
         int val;

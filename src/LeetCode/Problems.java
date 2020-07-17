@@ -354,6 +354,35 @@ public class Problems {
 
         System.out.println("diff = " + (eSum - aSum));
     }
+    
+    public static void moveZeroes(int[] arr){
+        // maintain a var i for tracking zeroes
+        // maintain a var j for tracking non-zeroes
+        // while i is non-zero i++
+        // while j is zero j++
+        // swap i & j,i++, j++
+
+        int n = arr.length;
+
+        int i = 0,j = 0;
+
+        while(i < n) {
+            while (i < n && arr[i] != 0) i++;
+            if(j == 0 && i == n) break;
+            j = i + 1;
+            while (j < n && arr[j] == 0) j++;
+
+            if(j == n) j = j - 1;
+            int temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;
+
+            i++;
+            j=i+1;
+        }
+
+        Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
+    }
 
     public class Node {
         int val;

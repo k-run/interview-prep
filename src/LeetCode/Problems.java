@@ -335,6 +335,25 @@ public class Problems {
 
         System.out.println(false);
     }
+    
+    public static void missingNumber(int[] arr){
+        // store the actual sum
+        // calculate the expected sum
+        // diff
+
+        int n =arr.length;
+
+        int aSum = 0, eSum = 0;
+
+        aSum = Arrays.stream(arr).sum();
+
+        eSum = (n*(n+1))/2;
+
+        System.out.println("aSum = " + aSum);
+        System.out.println("eSum = " + eSum);
+
+        System.out.println("diff = " + (eSum - aSum));
+    }
 
     public class Node {
         int val;

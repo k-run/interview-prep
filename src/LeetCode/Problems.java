@@ -454,6 +454,30 @@ public class Problems {
 
         System.out.println("count = " + (count));
     }
+    
+    public static void transposeMatrix(int[][] arr){
+        // for every cell where i == j,
+        // init k = 1
+        // run till j+k and i+k < n, swap a[i][j+k] with a[i+k][j]
+
+        int n = arr.length;
+        int m = arr[0].length;
+
+        int[][] res = new int[m][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                res[j][i] = arr[i][j];
+            }
+        }
+
+        for(int[] a: res) {
+            for(int x: a) {
+                System.out.print(x + " ");
+            }
+            System.out.println();
+        }
+    }
 
     public class Node {
         int val;

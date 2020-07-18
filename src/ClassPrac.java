@@ -2834,219 +2834,70 @@ public class ClassPrac extends TemplateClass {
         System.out.println(res2);
     }
 
-    public static void removeDup(String string){
-        // if fitst index and last index are same, append it into resultant
-        int n = string.length();
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < n; i++) {
-            if(stringBuilder.toString().indexOf(string.charAt(i)) == -1) {
-                stringBuilder.append(string.charAt(i));
-            }
-        }
-        System.out.println(stringBuilder);
-    }
-
-    public static void groupAnagrams(String[] arr){
-        // sort the strings
-        // create a map of string vs freq
-        // print in sorted order of values
+    public static void minSwaps(int[] arr){
+        // insertion sort
+        // first element is always sorted
+        // keep track of the sorted elements via j, init j as 0
+        // from next one onwards,
+        // if a[j] > a[i], move j's value to j+1, till j>0 && arr[j] > arr[i]
+        // put arr[i] in a[j+1]
 
         int n = arr.length;
-        HashMap<String, Integer> map = new HashMap<>();
+        int count = 0;
 
-        for(String s: arr) {
-            char[] chars = s.toCharArray();
-            Arrays.sort(chars);
+        for (int i = 1; i < n; i++) {
+            int j = i-1;
+            int k =  arr[i];
+            boolean hasEntered = false;
 
-            map.put(new String(chars), map.getOrDefault(new String(chars), 0) + 1);
-        }
-
-        map.values()
-                .stream()
-                .sorted(Comparator.naturalOrder())
-                .forEach(e -> System.out.print(e + " "));
-    }
-
-    public static void distinctSubstring(String string){
-        // take substrings of length 2
-        // check if the resultant string contains it or not
-        // if not, count++
-
-        int n = string.length(), count = 0;
-        List<String> list = new ArrayList<>();
-
-        for (int i = 0; i < n-1; i++) {
-            String sub = string.substring(i, i+2);
-            if(!list.contains(sub)) {
-                count++;
-                list.add(sub);
+            while (j>= 0 && arr[j] > k) {
+                if(!hasEntered) {
+                    count++;
+                    hasEntered = true;
+                }
+                arr[j+1] = arr[j];
+                j--;
             }
 
+           arr[j+1] = k;
+
         }
 
+        Utils.printIntArray(arr);
         System.out.println("count = " + count);
     }
 
-    public static void patternPrinting(int n){
-        // till n > 0, recursively call the function
-        // once n < 0, return
-        if(n < 0) {
-            System.out.print(n + " ");
-            return;
-        }
+    public static boolean isSorted(int[] arr){
+        int[] copy = Arrays.copyOf(arr, arr.length);
+        Arrays.sort(arr);
 
-        if(n > 0) {
-            System.out.print(n + " ");
-            patternPrinting(n-5);
-        }
-
-        System.out.print(n + " ");
+        return Arrays.equals(arr, copy);
     }
 
-    public static void maximumDifferenceIndices(int[] arr){
-        // create a map of integer vs list of indices
-        // traverse entries and update max
+    public static void firstComeFirstServe(int[] arr, int k){
+        // create a linked hashmap of arr ele as key vs their freq
+        // return the first entry that has a value as k
+        //
 
         int n = arr.length;
-        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        LinkedHashMap<Integer, Integer> map = new LinkedHashMap<>();
 
         for (int i = 0; i < n; i++) {
-            List<Integer> index;
-
-            if(map.containsKey(arr[i])) {
-                index = map.get(arr[i]);
-                index.add(i);
-            }
-
-            else {
-                index = new ArrayList<>();
-                index.add(i);
-            }
-
-            map.put(arr[i],index);
-        }
-
-        int max = 0;
-
-        for(Map.Entry<Integer , List<Integer>> entry: map.entrySet()) {
-            if(entry.getValue().size() > 1) {
-                List<Integer> liost = entry.getValue();
-                max = Math.max(max, liost.get(liost.size()-1) - liost.get(0));
-            }
-        }
-
-        System.out.println("max = " + max);
-    }
-    
-    public static void booleanMatrix(int[][] arr){
-        // traverse once through the arr to find the row and col of 1's
-        // store them in a map
-        // map - key 1 - value - row,col
-        // traverse through the map to fill all cells in that row as 1
-        // and all cells in that col as 1
-        
-        int n = arr.length;
-        int m = arr[0].length;
-        
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if(arr[i][j] == 1) {
-                    map.put(i, j);
-                }
-            }
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
         }
 
         System.out.println("map = " + map);
 
-        for(Map.Entry<Integer, Integer> entry: map.entrySet()) {
-            dfsTraversal(arr, entry.getKey(), entry.getValue(), n, m);
-        }
-
-        Utils.printInt2DArray(arr);
-    }
-
-    public static void dfsTraversal(int[][]arr, int r, int c, int n, int m){
-        // check for boundary conditions
-        if(r < 0 || r == n || c < 0 || c == m) return;
-
-        for (int i = 0; i < n; i++) {
-            arr[i][c] = 1;
-        }
-
-        for (int j = 0; j < m; j++) {
-            arr[r][j] = 1;
-        }
-    }
-
-    public static void countSetAndNonSetBits(int n){
-        // count set bits by doing n&n-1 till n becomes 0
-        // the count is the count of number of 1s
-        // the total number of bits is right shift
-
-        int total = 0;
-
-        int countOfSet = 0;
-        int dummyN = n;
-
-        while(n!=0) {
-            n &= (n-1);
-            countOfSet++;
-        }
-
-        System.out.println("countOfSet = " + countOfSet);
-
-        while (dummyN != 0) {
-            dummyN = dummyN >> 1;
-            total++;
-        }
-
-        System.out.println("total = " + total);
-
-        System.out.println("count of not set = " + (total - countOfSet));
-    }
-    
-    public static void collectingTrees(int n){
-        // while n != 0
-        // get the closest value to n in terms of 2^i
-        // subtract n
-        // update count
-
-        int count = 0;
-
-        while (n > 0) {
-
-            int btValue = 1;
-
-            while (btValue << 1 <= n) {
-                btValue = btValue << 1;
+        for(Map.Entry<Integer, Integer> e: map.entrySet()) {
+            if(e.getValue() == k) {
+                System.out.println(e.getKey());
+                return;
             }
-
-            System.out.println("btValue = " + btValue);
-
-            n -= btValue;
-            System.out.println("n = " + n);
-
-            count++;
         }
 
-        System.out.println("count = " + count);
+        System.out.println(-1);
     }
-    
-    public static void aryaAndTheGreatWar(int n){
-        // count the number of set bits
 
-        int count = 0;
-
-        while (n!=0) {
-            n &= (n-1);
-            count++;
-        }
-
-        System.out.println("count = " + count);
-    }
 
     class RightNode {
         int data;

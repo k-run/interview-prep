@@ -479,6 +479,28 @@ public class Problems {
         }
     }
 
+    public static void shuffleTheArray(int[] arr){
+        // keep track of y elements by init j with n
+        // store elements one by one
+
+        int n = arr.length;
+        int size = n;
+
+        int[] res = new int[size];
+
+        int j = n/2;
+        int i = 0, k = 0;
+
+        while (j < n) {
+           res[k] =  arr[i++];
+           k++;
+           res[k] = arr[j++];
+           k++;
+        }
+
+        Arrays.stream(res).forEach(e -> System.out.print(e + " "));
+    }
+
     public class Node {
         int val;
         Node next;

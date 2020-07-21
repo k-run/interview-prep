@@ -2955,6 +2955,34 @@ public class ClassPrac extends TemplateClass {
 
         return (josephusProblem(n-1, k) + k-1) % n + 1;
     }
+    
+    public static void findLargestWordInDictionary(String[] arr, String str){
+        // create a map of string vs diff count
+        // diff count is number of chars of str not present in arr's ele
+        // once map is created, get the entry which has the least value
+
+        int n = arr.length;
+
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int c = 0;
+            String s = arr[i];
+            for (int j = 0; j < s.length(); j++) {
+                if(str.indexOf(s.charAt(j)) != -1) c++;
+            }
+
+            map.put(s, str.length() - c);
+        }
+
+        System.out.println("map = " + map);
+
+        System.out.println(map.entrySet()
+                .stream()
+                .min(Comparator.comparing(Map.Entry::getValue))
+                .get()
+                .getKey());
+    }
 
 
     class RightNode {

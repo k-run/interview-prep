@@ -2920,6 +2920,29 @@ public class ClassPrac extends TemplateClass {
         else System.out.println(true);
     }
 
+    public static void findNumberOfUniquePaths(int[][] arr){
+        // fill 1st rol and 1st col with 1 as from origin 1st row can be reached only in 1 way
+        // 1st col as 1 as from origin there's only 1 way
+        // rest of the cells, either can be traversed by immediate left taking right or immediate up
+        // taking down
+
+        int n = arr.length , m = arr[0].length;
+        for (int i = 0; i < m; i++) {
+            arr[0][i] = 1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            arr[i][0] = 1;
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                arr[i][j] = (arr[i][j-1] + arr[i-1][j]);
+            }
+        }
+
+        Utils.printInt2DArray(arr);
+    }
     class RightNode {
         int data;
         RightNode left;

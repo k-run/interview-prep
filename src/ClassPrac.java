@@ -2943,6 +2943,20 @@ public class ClassPrac extends TemplateClass {
 
         Utils.printInt2DArray(arr);
     }
+    
+    public static int josephusProblem(int n , int k){
+        // in every iteration, one person is killed so n decreases by 1
+        // every kth person is killed, so (k+1)th person holds the sword to kill
+        // but here doing k-1 for 1-based indexing
+        // modulo it by n to prevent it going out of bounds
+        // base case if n == 1, return 1
+
+        if(n == 1) return 1;
+
+        return (josephusProblem(n-1, k) + k-1) % n + 1;
+    }
+
+
     class RightNode {
         int data;
         RightNode left;

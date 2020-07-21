@@ -2898,6 +2898,27 @@ public class ClassPrac extends TemplateClass {
         System.out.println(-1);
     }
 
+    public static void reArrangeCharacters(String str){
+        // create a map of char vs freq
+        // if max element in values < n/2, return true
+        // else return false
+
+        int n = str.length();
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            map.put(str.charAt(i), map.getOrDefault(str.charAt(i),0) + 1);
+        }
+        System.out.println("map = " + map);
+
+        int value = map.values().stream().max(Comparator.naturalOrder()).get();
+        System.out.println("value = " + value);
+
+
+        if(value > n/2) System.out.println(false);
+        else System.out.println(true);
+    }
 
     class RightNode {
         int data;

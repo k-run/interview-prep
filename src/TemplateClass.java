@@ -51,7 +51,7 @@ public class TemplateClass {
 
             //ArrayList<String> list = new ArrayList<>(Utils.getListFromStringArray(a.split(" ")));
             //ClassPrac.findLargestWordInADict(a.split(","), b);
-            ClassPrac.nutsAndBolts(a.split(" "), b.split(" "));
+            ClassPrac.findLargestWordInDictionary(a.split(" "), b);
         }
     }
     
@@ -129,7 +129,7 @@ public class TemplateClass {
 
     }
 
-    public static void inputAsTcNMultiDArray() throws IOException {
+    public static void  inputAsTcNMultiDArray() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
@@ -147,16 +147,16 @@ public class TemplateClass {
                 }
             }
 
-            String[] startEnd = br.readLine().split(" ");
-            int x1 = Integer.parseInt(startEnd[0]);
-            int y1 = Integer.parseInt(startEnd[1]);
-
-            int x2 = Integer.parseInt(startEnd[2]);
-            int y2 = Integer.parseInt(startEnd[3]);
-
-           MyPoint myPoint = new MyPoint(x1, y1);
-           MyPoint myPoint1 = new MyPoint(x2, y2);
-           ClassPrac.additionOfSubMatrix(a, myPoint, myPoint1);
+//            String[] startEnd = br.readLine().split(" ");
+//            int x1 = Integer.parseInt(startEnd[0]);
+//            int y1 = Integer.parseInt(startEnd[1]);
+//
+//            int x2 = Integer.parseInt(startEnd[2]);
+//            int y2 = Integer.parseInt(startEnd[3]);
+//
+//           MyPoint myPoint = new MyPoint(x1, y1);
+//           MyPoint myPoint1 = new MyPoint(x2, y2);
+//           ClassPrac.additionOfSubMatrix(a, myPoint, myPoint1);
 
 //            int[][] arr = new int[n][m];
 //            List<List<String>> lists = new ArrayList<>();
@@ -175,7 +175,6 @@ public class TemplateClass {
 //                }
 //            }
 
-            //ClassPrac.booleanMatrixProblem(arr);
 
         }
     }
@@ -190,7 +189,7 @@ public class TemplateClass {
 
             List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
 
-            ClassPrac.threeWayPartitioning(list, n, k);
+            //ClassPrac.threeWayPartitioning(list, n, k);
         }
 
     }
@@ -214,15 +213,38 @@ public class TemplateClass {
 
             //List<Integer> list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
 
-            ClassPrac.threeWayPartitioning(list, a, b);
+            //ClassPrac.threeWayPartitioning(list, a, b);
         }
 
+    }
+
+    public static void inputAsTcList() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            List<String> list = new ArrayList<>();
+            int n = Integer.parseInt(br.readLine());
+            for (int j = 0; j < n; j++) {
+                String a = br.readLine();
+                list.add(a);
+            }
+
+        }
     }
 
     public static void main (String[] args) throws IOException
     {
         //code
-        inputAsTc2Strings();
+        MyStack s = new MyStack();
+        s.push(3);
+        s.push(5);
+        s.getMin();
+        s.push(2);
+        s.push(1);
+        s.getMin();
+        s.pop();
+        s.getMin();
+        s.pop();
     }
 
     public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

@@ -3003,6 +3003,38 @@ public class ClassPrac extends TemplateClass {
         return root.data + oldValue;
     }
 
+    public static void zigZagLevelOrderTraversal(Node root){
+        // use 2 stacks
+        // 1 for pushing left & right
+        // 2 for pushing right & left
+
+        Stack<Node> s1 = new Stack<>();
+        Stack<Node> s2 = new Stack<>();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        s1.push(root);
+
+        while (!s1.isEmpty() || !s2.isEmpty()) {
+            while (!s1.isEmpty()) {
+                Node tmp = s1.pop();
+                System.out.println(tmp.data + " ");
+                list.add(tmp.data);
+
+                s2.push(tmp.left);
+                s2.push(tmp.right);
+            }
+
+            while(!s2.isEmpty()) {
+                Node tmp = s2.pop();
+                System.out.println("tmp = " + tmp.data);
+                list.add(tmp.data);
+
+                s1.push(tmp.right);
+                s1.push(tmp.left);
+            }
+        }
+    }
+
     class RightNode {
         int data;
         RightNode left;

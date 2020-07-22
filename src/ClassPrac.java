@@ -2984,6 +2984,24 @@ public class ClassPrac extends TemplateClass {
                 .getKey());
     }
 
+    public void toSumTree(Node root){
+        //add code here.
+        // store the old value
+        // recur for the left and right subtree
+        // return sum of these 2 + old value
+
+        SumTree(root);
+    }
+
+    public int SumTree(Node root) {
+        if(root == null) return 0;
+
+        int oldValue = root.data;
+
+        root.data = SumTree(root.left) + SumTree(root.right);
+
+        return root.data + oldValue;
+    }
 
     class RightNode {
         int data;

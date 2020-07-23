@@ -3055,6 +3055,33 @@ public class ClassPrac extends TemplateClass {
                 .get().toString().replaceAll("=", " "));
     }
 
+    public static LinkedListNode deleteNode(LinkedListNode head, int pos){
+        int c = 1;
+
+        if(pos == 1) {
+            head = head.next;
+            return head;
+        }
+        LinkedListNode ptr = head;
+        while (c < pos-1) {
+            c++;
+            ptr = ptr.next;
+        }
+
+        if(ptr.next.next != null) {
+            ptr.next = ptr.next.next;
+            LinkedListNode ptr2 = ptr;
+            ptr = ptr.next;
+            ptr.prev = ptr2;
+        }
+
+        else {
+            ptr.next = null;
+        }
+
+        return head;
+    }
+
     class RightNode {
         int data;
         RightNode left;

@@ -3035,6 +3035,26 @@ public class ClassPrac extends TemplateClass {
         }
     }
 
+    public static void winnerOfElection(String[] arr){
+        // create a treemap of string vs freq
+        // select the string with max value
+
+        int n = arr.length;
+
+        TreeMap<String, Integer> map = new TreeMap<>();
+
+        for (int i = 0; i < n; i++) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+        }
+
+        System.out.println("map = " + map);
+
+        System.out.println(map.entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .get().toString().replaceAll("=", " "));
+    }
+
     class RightNode {
         int data;
         RightNode left;

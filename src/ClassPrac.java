@@ -3100,6 +3100,36 @@ public class ClassPrac extends TemplateClass {
             System.out.print(maxHeap.poll() + " ");
         }
     }
+
+    public static LinkedListNode reverseLinkedListInK(LinkedListNode head, int k){
+        // reverse for k elements using the std reverse algo
+        // connect prev's next to the return value of the recursive call
+        // return head as base case
+
+        if(head == null) return null;
+
+        int count = 1;
+        LinkedListNode ptr = head;
+
+        while (ptr != null && count <= k) {
+            ptr = ptr.next;
+            count++;
+        }
+
+        LinkedListNode prev = null, curr = head, next;
+
+        while (curr != ptr) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        head.next = reverseLinkedListInK(ptr, k);
+
+        return prev;
+    }
+
     class RightNode {
         int data;
         RightNode left;

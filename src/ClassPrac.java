@@ -3082,6 +3082,24 @@ public class ClassPrac extends TemplateClass {
         return head;
     }
 
+
+    public static void kLargestElements(int[] arr, int k){
+        // create a max heap
+        // retrieve first k elements
+
+        int n = arr.length;
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        for (int i = 0; i < n; i++) {
+            maxHeap.add(arr[i]);
+        }
+
+        System.out.println("maxHeap = " + maxHeap);
+
+        while (k-- > 0) {
+            System.out.print(maxHeap.poll() + " ");
+        }
+    }
     class RightNode {
         int data;
         RightNode left;

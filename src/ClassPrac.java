@@ -3183,6 +3183,32 @@ public class ClassPrac extends TemplateClass {
         }
 
     }
+    
+    public static void metaStrings(String s1, String s2){
+        // check for unequal lengths
+        // maintain a flag isSet
+        // if a char's idx is diff and flag is not set, set it
+        // if flag is set return false
+
+        int n1 = s1.length();
+        int n2 = s2.length();
+        int c = 0;
+
+        if(n1 != n2) {
+            System.out.println(0);
+            return;
+        }
+
+        for (int i = 0; i < n1; i++) {
+           if(s1.charAt(i) != s2.charAt(i)) {
+              c++;
+           }
+
+        }
+        System.out.println("c = " + c);
+
+        System.out.println(c == 2 ? 1 : 0);
+    }
 
 
 

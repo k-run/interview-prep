@@ -3155,6 +3155,37 @@ public class ClassPrac extends TemplateClass {
         System.out.println(list);
     }
 
+    public static void kthLargestInStream(int[] arr, int k){
+        // ignore the first k-1 elements
+        // from kth onwards, maintain a heap of size k
+        // if the new element is > heap.peek(),
+        // poll the heap and add the new elements
+        // else ignore
+
+        int n = arr.length;
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        for (int i = 0; i < n; i++) {
+            if(i < k -1) {
+                System.out.print(-1 + " ");
+                continue;
+            }
+
+            if(i == k-1) minHeap.add(arr[i]);
+            else {
+                if (minHeap.peek() != null && arr[i] > (minHeap.peek())) {
+                    minHeap.poll();
+                    minHeap.add(arr[i]);
+                }
+            }
+            System.out.print(arr[i] + " ");
+        }
+
+    }
+
+
+
     class RightNode {
         int data;
         RightNode left;

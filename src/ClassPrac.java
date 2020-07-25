@@ -3129,6 +3129,31 @@ public class ClassPrac extends TemplateClass {
 
         return prev;
     }
+    
+    public static void sortedSubsequenceOfSize3(int[] arr){
+        // create a map of indices vs arr ele
+        // iterate through the values and maintain increasing order by max and count
+        // if values' ele > max, add it to list
+
+        int n = arr.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(i, arr[i]);
+        }
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        int max = Integer.MIN_VALUE;
+        for(int v: map.values()) {
+            if(v > max) {
+                list.add(v);
+                max = v;
+            }
+        }
+
+
+        System.out.println(list);
+    }
 
     class RightNode {
         int data;

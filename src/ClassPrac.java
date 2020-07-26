@@ -3249,6 +3249,34 @@ public class ClassPrac extends TemplateClass {
         System.out.println(arr[n][m]);
     }
 
+    public static void maxSumWithoutAdjacents(int[] arr){
+        // maintain 2 vars
+        // considering the case for including current ele
+        // incl: including the curr ele, so skipping prev ele
+        // excl: max of prev incl and excl
+
+        int n = arr.length;
+
+        int incl = arr[0];
+        int excl = 0;
+        int excl_new  = 0;
+
+
+        for (int i = 1; i < n; i++) {
+            // doing this as incl will change later,
+            // so storing the max of previous incl and excl
+            excl_new = Math.max(incl , excl);
+
+            // update incl with curr element, skip prev and add ele before that
+            incl = arr[i] + excl;
+
+            //update excl with new val
+            excl = excl_new;
+        }
+
+        System.out.println(Math.max(excl, incl));
+    }
+
     class RightNode {
         int data;
         RightNode left;

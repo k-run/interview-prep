@@ -3210,7 +3210,44 @@ public class ClassPrac extends TemplateClass {
         System.out.println(c == 2 ? 1 : 0);
     }
 
+    public static void wildCardPatternMatching(String patt, String str){
+        // convert strings to char arrays
+        // init 0,0 as true
+        // only way null string is true if pat is '*', so set r=0, all cols to true
+        // if pat[i] == str[i] or pat[i] = '?', take the value from the diagonal
+        // as it is equivalent of removing one char from both pat and str
+        // if pat[i] = '*', 0 or more chars, do left side || up side
+        // left side meaning * represents 0 chars
+        // up side meaning * represents multi chars
 
+        char[] pat = patt.toCharArray();
+        char[] chars = str.toCharArray();
+
+        int n = str.length() , m = patt.length();
+        boolean[][] arr = new boolean[n+1][m+1];
+
+        arr[0][0] = true;
+
+        for (int j = 1; j <= m ; j++) {
+            if(patt.charAt(j-1) == '*') arr[0][j] = arr[0][j-1];
+        }
+
+
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if(pat[j-1] == '?' || pat[j-1] == chars[i-1]) {
+                    arr[i][j] = arr[i-1][j-1];
+                }
+                else if(pat[j-1] == '*') {
+                    arr[i][j] = arr[i-1][j] || arr[i][j-1];
+                }
+                else arr[i][j] = false;
+            }
+        }
+
+        System.out.println(arr[n][m]);
+    }
 
     class RightNode {
         int data;

@@ -3298,6 +3298,48 @@ public class ClassPrac extends TemplateClass {
 
     }
 
+    public static void nthUglyNumber(int n){
+        // an ugly number is one who has only 2,3, 5 as prime factors
+        // the seq is 1,2,3,4,5,6,8,9..
+        // It is subseq of 2, 3 and 5 with i iterating
+        // create an arr for ugly numbers
+        // store the next multiples of 2, 3 and 5 in n2, n3 and n5
+        // store the iterators in i2, i3 and i5
+        // init arr with 1 and ans with 1
+        // from 1 to n, update ans with min of next multiples of 2,3,5
+        // now check whose was min to update iterators and next multiple
+        // update next multiple by multiplying i with ugly[resp. iterator]
+
+        int[] ugly = new int[n];
+        int n2= 2 ,n3= 3, n5 = 5;
+        int i2 = 0, i3 = 0, i5 = 0;
+        int ans = 1;
+        ugly[0] = 1;
+
+        for (int i = 1; i < n; i++) {
+            ans = Math.min(n2,Math.min(n3, n5));
+
+            ugly[i] = ans;
+
+            if(ans == n2) {
+                i2++;
+                n2 = 2 * ugly[i2];
+            }
+
+            if(ans == n3) {
+                i3++;
+                n3 = 3 * ugly[i3];
+            }
+
+            if(ans == n5) {
+                i5++;
+                n5 = 5 * ugly[i5];
+            }
+        }
+
+        System.out.println(ans % Math.pow(10, 7) + 7);
+    }
+
     class RightNode {
         int data;
         RightNode left;

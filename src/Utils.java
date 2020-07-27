@@ -48,5 +48,24 @@ public class Utils {
 
     public static void printIntArray(int[] arr){
         Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
+        System.out.println();
+    }
+
+    public static int binarySearch(int[] arr, int x){
+        // returning l depending on use case
+        // Here the exact position of x in arr is needed
+
+        // now returning x depending on use case
+        // Here the element itself is required
+
+        int l = 0, n = arr.length, h = n - 1;
+        while (l <= h) {
+            int m = (l + h)/2;
+            if(arr[m] == x) return m;
+            else if(arr[m] > x) h = m - 1;
+            else l = m + 1;
+        }
+
+        return l-1;
     }
 }

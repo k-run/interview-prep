@@ -3276,6 +3276,27 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println(Math.max(excl, incl));
     }
+    
+    public static void maximumHeightTree(int n){
+            // create a csum arr by adding prev csum element with i+1
+        // find index of n in csum arr
+
+        int[] csum = new int[n];
+
+        csum[0] = 1;
+
+        for (int i = 1; i < n; i++) {
+            csum[i] = csum[i-1] + i+1;
+        }
+
+        //Utils.printIntArray(csum);
+        Arrays.stream(csum).forEach(e -> System.out.print(e + " "));
+        System.out.println();
+
+        int height = Utils.binarySearch(csum, n);
+        System.out.println("height = " + (height+1));
+
+    }
 
     class RightNode {
         int data;

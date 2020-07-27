@@ -3349,7 +3349,36 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println((ones)*(ones-1)/2);
     }
+    
+    public static void lengthOfTheLongestSubString(String str){
+        int n = str.length();
+        StringBuilder stringBuilder = new StringBuilder();
+        int ans = 0;
 
+        for (int i = 0; i < n; i++) {
+            if(stringBuilder.indexOf(str.substring(i,i+1)) == -1) {
+                stringBuilder.append(str, i, i+1);
+            }
+
+            else {
+                ans = Math.max(ans, stringBuilder.length());
+                if(stringBuilder.charAt(stringBuilder.length()-1) == str.charAt(i)) {
+                    stringBuilder.delete(0, stringBuilder.length());
+                }
+                else {
+                    stringBuilder.delete(0, 1 + stringBuilder.indexOf(str.substring(i, i+1)));
+                }
+
+                stringBuilder.append(str, i, i+1);
+            }
+
+            System.out.println("stringBuilder = " + stringBuilder);
+        }
+
+        ans = Math.max(ans, stringBuilder.length());
+
+        System.out.println("ans = " + ans);
+    }
     class RightNode {
         int data;
         RightNode left;

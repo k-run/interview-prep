@@ -3339,6 +3339,16 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println(ans % Math.pow(10, 7) + 7);
     }
+    
+    public static void countSubStrings(String s){
+        int n = s.length();
+        int ones = 0;
+        for(int j=0;j<n;j++) {
+            if(s.charAt(j) == '1') ones++;
+        }
+
+        System.out.println((ones)*(ones-1)/2);
+    }
 
     class RightNode {
         int data;

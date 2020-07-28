@@ -3379,6 +3379,24 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("ans = " + ans);
     }
+
+    public static void powerOfNumbers(BigInteger n){
+        // reverse n to get r
+        // do pow(n,r)
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(n);
+
+        //System.out.println("stringBuilder = " + stringBuilder);
+
+        BigInteger r = new BigInteger(stringBuilder.reverse().toString());
+        System.out.println("r = " + r);
+
+        BigInteger mod = new BigInteger("1000000007");
+
+        System.out.println((n.modPow(r, mod)));
+    }
+
     class RightNode {
         int data;
         RightNode left;

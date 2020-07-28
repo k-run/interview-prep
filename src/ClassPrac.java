@@ -3396,6 +3396,39 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println((n.modPow(r, mod)));
     }
+    
+    public static boolean tripletSumInArray(int[] arr, int x){
+        // sort the arr
+        // keep i at 0, j at 1, k = n - 1
+        // if sum of i, j& k > k, k--
+        // else if sum < k, j++
+
+        int n = arr.length;
+        Arrays.sort(arr);
+
+        Utils.printIntArray(arr);
+        System.out.println();
+
+        for (int i = 0; i < n-2; i++) {
+            int j = i+1, k = n-1;
+            while (j <= k) {
+                if(arr[i] + arr[j] + arr[k] > x) k--;
+                else if(arr[i] + arr[j] + arr[k] < x) j++;
+                else {
+                    if(arr[i] != arr[j] && arr[i] != arr[k] && arr[j] != arr[k]) return true;
+                    j++;
+                    k--;
+                }
+
+                System.out.print("arr[i] = " + arr[i]);
+                System.out.print("arr[j] = " + arr[j]);
+                System.out.print("arr[k] = " + arr[k]);
+                System.out.println();
+            }
+        }
+
+        return false;
+    }
 
     class RightNode {
         int data;

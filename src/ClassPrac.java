@@ -3507,6 +3507,31 @@ public class ClassPrac extends TemplateClass {
 
         System.out.println("jumps = " + jumps[n-1]);
     }
+    
+    public static void changeBits(int n){
+        // count the number of bits present in n
+        // init count= 1 and i =0
+        // loop till pow(2,i) <= n, do i++
+        // new value will be pow(2,c) - 1
+        // diff will be new - old
+
+        int count = 0, i = 0;
+        int val = 1;
+
+        while (val <= n) {
+            i++;
+            val = (int) Math.pow(2,i);
+            count++;
+        }
+
+        System.out.println("count = " + count);
+
+        int newVal = (int) Math.pow(2, count) - 1;
+        System.out.println("newVal = " + newVal);
+
+        int diff = newVal - n;
+        System.out.println("diff = " + diff);
+    }
     class RightNode {
         int data;
         RightNode left;

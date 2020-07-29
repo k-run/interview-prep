@@ -3430,35 +3430,6 @@ public class ClassPrac extends TemplateClass {
         return false;
     }
 
-    public static void minNumberOfJumps(int[] arr){
-        // if ele is 0, return -1
-        // else inc ans with 1 and update i with a[i]
-
-        int n = arr.length;
-
-        int i = 0, count = 0;
-
-        while (i < n-1) {
-            if(arr[i] == 0) break;
-
-            if((i + arr[i] < n) && arr[i + arr[i]] == 0) {
-                int j = i+1;
-                while(j <n && arr[j] == 0) j++;
-                i = j;
-            }
-            else {
-                if(arr[i+1] > arr[i]) i = i + 1;
-                else i = i + arr[i];
-            }
-
-            count++;
-
-            System.out.println("i = " + i);
-        }
-
-        System.out.println("count = " + count);
-    }
-    
     public static void minNumberOfFlips(String string){
         // get the string's length
         // create the alternate bit string starting from 1 and 0
@@ -3507,6 +3478,34 @@ public class ClassPrac extends TemplateClass {
         }
 
         System.out.println(Math.min(count1, count2));
+    }
+
+    public static void minimumNumberOfJumps(int[] arr){
+        // create an array jumps to indicate
+        // the min steps it takes to reach that index
+        // store the next coming steps in j
+        // store the acc in i
+        // for every index, the min steps to reach there
+        // would be min steps it takes to reach the current index + 1 ,
+        // previously computed value in case of multiple ways to reach
+        int n = arr.length;
+        int[] jumps = new int[n];
+
+        jumps[0] = 0;
+
+        if(arr[0] == 0) return;
+
+        for (int i = 1; i < n; i++) {
+            jumps[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < i; j++) {
+                if(i <= j + arr[j] && jumps[j] != Integer.MAX_VALUE) {
+                    jumps[i] = Math.min(jumps[i], 1 + jumps[j]);
+                    break;
+                }
+            }
+        }
+
+        System.out.println("jumps = " + jumps[n-1]);
     }
     class RightNode {
         int data;

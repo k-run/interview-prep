@@ -3532,6 +3532,39 @@ public class ClassPrac extends TemplateClass {
         int diff = newVal - n;
         System.out.println("diff = " + diff);
     }
+    
+    public static void xorAfterMaking2NumbersSameInLength(int a, int b){
+        // left shift the smaller number by 1 and return the xor
+
+        if(a > b) {
+            int diff = getNumberOfBits(a) - getNumberOfBits(b);
+            b = b << diff;
+        }
+        else {
+            int diff = getNumberOfBits(b) - getNumberOfBits(a);
+            System.out.println("diff = " + diff);
+            a = a << diff;
+        }
+
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+
+        System.out.println(a ^ b);
+    }
+
+    public static int getNumberOfBits(int x){
+        int count = 0, i = 0;
+        int val = 1;
+
+        while (val <= x) {
+            i++;
+            val = (int) Math.pow(2,i);
+            count++;
+        }
+
+        return count;
+    }
+
     class RightNode {
         int data;
         RightNode left;

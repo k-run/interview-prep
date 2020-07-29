@@ -3430,6 +3430,84 @@ public class ClassPrac extends TemplateClass {
         return false;
     }
 
+    public static void minNumberOfJumps(int[] arr){
+        // if ele is 0, return -1
+        // else inc ans with 1 and update i with a[i]
+
+        int n = arr.length;
+
+        int i = 0, count = 0;
+
+        while (i < n-1) {
+            if(arr[i] == 0) break;
+
+            if((i + arr[i] < n) && arr[i + arr[i]] == 0) {
+                int j = i+1;
+                while(j <n && arr[j] == 0) j++;
+                i = j;
+            }
+            else {
+                if(arr[i+1] > arr[i]) i = i + 1;
+                else i = i + arr[i];
+            }
+
+            count++;
+
+            System.out.println("i = " + i);
+        }
+
+        System.out.println("count = " + count);
+    }
+    
+    public static void minNumberOfFlips(String string){
+        // get the string's length
+        // create the alternate bit string starting from 1 and 0
+        // do an XOR twice, once between given string and starting with 1
+        // another with 0
+        // res is min of no of set bits in the result
+
+        int n = string.length();
+
+        StringBuilder str1 = new StringBuilder(), str2 = new StringBuilder();
+
+        for (int i = 0; i < n; i++) {
+            if(i%2 == 0) {
+                str1.append(1);
+                str2.append(0);
+            }
+            else {
+                str1.append(0);
+                str2.append(1);
+            }
+        }
+
+        System.out.println("str1 = " + str1);
+        System.out.println("str2 = " + str2);
+
+        System.out.println("string = " + Long.parseLong(string, 2));
+
+        long res1 = Long.parseLong(string,2) ^ Long.parseLong(str1.toString(),2);
+
+        long res2 = Long.parseLong(string,2) ^ Long.parseLong(str2.toString(), 2);
+
+        System.out.println("res1 = " + res1);
+        System.out.println("res2 = " + res2);
+
+
+        int count1 = 0, count2 = 0;
+
+        while (res1 != 0) {
+            res1 &= (res1-1);
+            count1++;
+        }
+
+        while (res2 != 0) {
+            res2 &= (res2-1);
+            count2++;
+        }
+
+        System.out.println(Math.min(count1, count2));
+    }
     class RightNode {
         int data;
         RightNode left;

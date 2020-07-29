@@ -3564,6 +3564,39 @@ public class ClassPrac extends TemplateClass {
 
         return count;
     }
+    
+    public static void printAllPermutations(String s, int l, int r){
+        // swap the char with itself
+        // after permutation, move one step ahead
+        // back track to the original str to look for other permutations
+
+        int n = s.length();
+
+        if(l == r) {
+            System.out.print(s + " ");
+            System.out.println();
+        }
+        else {
+            for (int i = l; i <= r; i++) {
+                s = swap(s , l , i);
+                System.out.println("swapped string = " + s);
+                printAllPermutations(s, l+1, r);
+                s = swap(s, l,  i);
+                System.out.println("backtracking = " + s);
+            }
+        }
+    }
+
+    public static String swap(String str, int l, int i){
+        char tmp;
+        char[] chars = str.toCharArray();
+
+        tmp = chars[l];
+        chars[l] = chars[i];
+        chars[i] = tmp;
+
+        return String.valueOf(chars);
+    }
 
     class RightNode {
         int data;

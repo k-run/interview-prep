@@ -3614,6 +3614,33 @@ public class ClassPrac extends TemplateClass {
         System.out.println("count = " + count);
     }
 
+    public static void removeLoopFromLinkedList(LinkedListNode head){
+        // create 2 ptrs one slow and one fast
+        // run while both are not null, inc s by 1 and f by 2 and check if s == f break
+        // now, loop has been detected, move s to head and
+        // while f.next != s.next inc f and s
+        // update f next by null
+
+        LinkedListNode s = head, f = head;
+
+        while (s!=null && f!=null) {
+            s = s.next;
+            f = f.next.next;
+
+            if(s == f) break;
+        }
+
+        if(s == f) {
+            s = head;
+            while(s.next != f.next) {
+                f = f.next;
+                s = s.next;
+            }
+
+            f.next = null;
+        }
+    }
+
     class RightNode {
         int data;
         RightNode left;

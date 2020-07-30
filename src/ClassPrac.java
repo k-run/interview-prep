@@ -3598,6 +3598,22 @@ public class ClassPrac extends TemplateClass {
         return String.valueOf(chars);
     }
 
+    public static void facingTheSun(int[] arr){
+        //count the number of times a value increases
+
+        int n = arr.length;
+        int count = 0, max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            if(arr[i] > max) {
+                max = arr[i];
+                count++;
+            }
+        }
+
+        System.out.println("count = " + count);
+    }
+
     class RightNode {
         int data;
         RightNode left;

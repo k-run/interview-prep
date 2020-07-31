@@ -3685,7 +3685,44 @@ public class ClassPrac extends TemplateClass {
 
         //System.out.println("map = " + map);
     }
+    
+    public static void numberOfSubArraysWithEvenSum(int[] arr){
+        // create a csum arr
+        // if csum[i] is even, count++
+        // create a map to store even elements as key vs their freq
 
+        int n = arr.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        int sum = 0;
+        int count = 0;
+
+        int[] csum = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+            csum[i] = sum;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if(csum[i] % 2 == 0) count++;
+            if(i > 0) {
+                for (int j = 0; j < i; j++) {
+                    if((csum[j] - csum[i]) % 2 == 0)
+                    {
+                        map.put(csum[j] - csum[i],
+                                map.getOrDefault(csum[j] - csum[i], 0) + 1);
+                    }
+                }
+            }
+        }
+
+        int mapAns = map.values().stream().reduce(0, Integer::sum);
+        System.out.println("mapAns = " + mapAns);
+
+        System.out.println("count = " + count);
+    
+    }
     class RightNode {
         int data;
         RightNode left;

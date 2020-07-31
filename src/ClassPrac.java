@@ -3641,6 +3641,51 @@ public class ClassPrac extends TemplateClass {
         }
     }
 
+    public static void productArrayPuzzle(int[] arr){
+        // store the product in p
+        // create a res arr
+        // make res[i] = p/arr[i]
+
+        int n = arr.length;
+        int p = 1;
+        int[] res = new int[n];
+
+        int j = 0;
+        p = Arrays.stream(Arrays.copyOfRange(arr, 1, n)).reduce(1, (a,b) -> a * b);
+        res[0] = p;
+
+
+        for (int i = 1; i < n; i++) {
+            res[i] = res[i-1] * arr[i-1] / arr[i];
+        }
+        
+        Utils.printIntArray(res);
+    }
+    
+    public static void stringModification(String string){
+        // create a treemap of char vs their freq
+
+        int n = string.length();
+
+       TreeMap<Character, Integer> map = new TreeMap<>();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < n; i++) {
+            map.put(string.charAt(i), map.getOrDefault(string.charAt(i), 0) + 1);
+        }
+
+        map.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEach(e -> stringBuilder.append(e.getKey()));
+
+
+
+        System.out.println("list = " + stringBuilder);
+
+        //System.out.println("map = " + map);
+    }
+
     class RightNode {
         int data;
         RightNode left;

@@ -3723,6 +3723,28 @@ public class ClassPrac extends TemplateClass {
         System.out.println("count = " + count);
     
     }
+
+    public static void buyAndSellStocks(int[] arr) {
+        // store the ans in gMax, init it with 0
+        // store the running max in lMax, init it with 0
+        // run a loop,i from 0 to n
+        // run a nested loop , j from i+1 to n
+        // if a[j] > a[i], update lMax
+        // update gMax on completion of nested loop
+
+        int n = arr.length;
+        int gMax = 0 , lMax = 0;
+        for (int i = 0; i < n; i++) {
+            lMax = 0;
+            for (int j = i+1; j < n; j++) {
+                if(arr[j] > arr[i]) lMax = Math.max(lMax, arr[j] - arr[i]);
+            }
+            gMax = Math.max(gMax, lMax);
+        }
+
+        System.out.println("gMax = " + gMax);
+    }
+
     class RightNode {
         int data;
         RightNode left;

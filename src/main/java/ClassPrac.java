@@ -3706,6 +3706,27 @@ public class ClassPrac extends TemplateClass {
         return res;
     }
 
+    public static void subtractProductAndSum(int n) {
+        // get the digits of the number in arr
+        // store the product and sum diff
+
+        List<Integer> list = new ArrayList<>();
+
+        while(n > 0) {
+            int d = n%10;
+            list.add(d);
+            n /= 10;
+        }
+
+        int p = list.stream().reduce(1, (a,b) -> a * b);
+        int s = list.stream().reduce(0, Integer::sum);
+
+        System.out.println("s = " + s);
+        System.out.println("p = " + p);
+
+        System.out.println(p-s);
+    }
+
     class RightNode {
         int data;
         RightNode left;

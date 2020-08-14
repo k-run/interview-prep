@@ -3727,6 +3727,25 @@ public class ClassPrac extends TemplateClass {
         System.out.println(p-s);
     }
 
+    public static int[] decompress(int[] arr) {
+        // take 2 elements from arr as l and r
+        // fill res arr with r present l times
+
+        int n = arr.length;
+        List<Integer> ans = new ArrayList<>();
+
+        int idx = 0;
+        for (int i = 0; i < n; i++) {
+           int freq = arr[2*i];
+           int val =  arr[2*i + 1];
+
+           while(freq-- > 0) {
+               ans.add(val);
+           }
+        }
+        return ans.stream().mapToInt(i -> i).toArray();
+    }
+
     class RightNode {
         int data;
         RightNode left;

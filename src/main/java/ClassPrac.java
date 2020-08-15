@@ -3746,6 +3746,25 @@ public class ClassPrac extends TemplateClass {
         return ans.stream().mapToInt(i -> i).toArray();
     }
 
+    public static void thirdMax(int[] arr) {
+        // create a max heap
+        // poll till 3rd element
+        // if n < 3 return top of heap
+        // if there are dups 2nd or 1st, return next uniq
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(Comparator.reverseOrder());
+        for(int e: arr) {
+            if(!maxHeap.contains(e)) maxHeap.add(e);
+        }
+
+        if(maxHeap.size() < 3) System.out.println(maxHeap.poll());
+        else {
+            for (int i = 0; i < 2; i++) {
+                maxHeap.poll();
+            }
+            System.out.println(maxHeap.poll());
+        }
+    }
     class RightNode {
         int data;
         RightNode left;

@@ -3748,6 +3748,17 @@ public class ClassPrac extends TemplateClass {
         return Math.max(1 + lh, 1 + rh);
     }
 
+    public static boolean isSameTree(Node p, Node q) {
+        // if p and q both are null, return true
+        // if p or q are null, return false
+        // return result of p.data == q.data & recur for left subtrees and right subtrees
+
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+
+        return p.data == q.data && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+    }
+
     class RightNode {
         int data;
         RightNode left;

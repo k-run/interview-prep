@@ -3759,6 +3759,19 @@ public class ClassPrac extends TemplateClass {
         return p.data == q.data && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
 
+    public static void mirror(Node root) {
+        if(root == null) return;
+
+        if(root.left == null && root.right == null) return;
+
+        Node tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+
+        mirror(root.left);
+        mirror(root.right);
+    }
+
     class RightNode {
         int data;
         RightNode left;

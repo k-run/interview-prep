@@ -1,9 +1,9 @@
 //import javafx.util.Pair;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -3770,6 +3770,172 @@ public class ClassPrac extends TemplateClass {
 
         mirror(root.left);
         mirror(root.right);
+    }
+
+    public static void minElementInBST(Node root) {
+        // do the inorder traversal of tree
+        // store the inorder in a list
+        // list will be sorted
+        // return the 1st element of the list
+
+        List<Integer> list = new ArrayList<>();
+
+        minElementInBST(root, list);
+
+        System.out.println("list = " + list.get(0));
+    }
+
+    public static void minElementInBST(Node root, List<Integer> list) {
+        minElementInBST(root.left, list);
+        list.add(root.data);
+        minElementInBST(root.right, list);
+    }
+
+    public static void readFromFile(String filePath) throws IOException {
+        // create a fileInputStream instance that takes filepath as args
+        // create a scanner instance that takes fileinputstream instance as args
+        // while sc has nextLine, print sc.nextLine
+
+        FileInputStream fileInputStream = new FileInputStream(filePath);
+        Scanner scanner = new Scanner(fileInputStream);
+
+        while (scanner.hasNextLine()) {
+            System.out.println(scanner.nextLine());
+        }
+        scanner.close();
+    }
+
+    public static void writeIntoFile() throws IOException {
+        // create a file instance with args as arbitary file path as args
+        // create a fileoutputstream instance with file instance as args
+        // create a bufferedwriter instance as fileoutputstream instance as args
+
+        // do bufferedwriter's instance .write
+
+        File file = new File("writeFile.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+
+        for (int i = 0; i < 10; i++) {
+            bufferedWriter.write(String.valueOf(i));
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+    }
+
+    public static void littleElephantAndCandies(int totalCandies, int totalNumberElephants, int[] arr) {
+        // sum of arr should be <= total number of candies
+
+        int sum = Arrays.stream(arr).sum();
+
+        if(sum <= totalCandies) System.out.println("Yes");
+        else System.out.println("No");
+    }
+
+    public static void helpJarvis(String str) {
+        // convert the string to int arr
+        // calculate the sum into aSum
+        // get the min number from the arr
+        // create another arr of size same as first arr starting from min number
+        // calculate the sum into eSum
+        // if aSum == eSum, return true else false
+
+        String[] strArr = str.split("");
+
+        int n = strArr.length;
+
+        int[] arr = new int[strArr.length];
+
+        for (int i = 0; i < strArr.length; i++) {
+            arr[i] = Integer.parseInt(strArr[i]);
+        }
+
+        int min = Arrays.stream(arr).min().getAsInt();
+
+        int aSum = Arrays.stream(arr).sum();
+
+        int[] aux = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            aux[i] = min++;
+        }
+
+        int eSum = Arrays.stream(aux).sum();
+
+        if(eSum == aSum) System.out.println(true);
+        else System.out.println(false);
+    }
+
+    public static void countTheElements(int[] a, int[] b, int i) {
+        // find the element k as a[i]
+        // traverse through b and find count of elements <= k
+
+        int k = a[i];
+        int count = 0;
+
+        for (int j = 0; j < b.length; j++) {
+            if(b[j] <= k) count++;
+        }
+
+        System.out.println("count = " + count);
+    }
+
+    public static void greedyFox(int[] arr) {
+        // store the return value in ans
+        // if a[i] > a[i-1], update sum with a[i-1]
+        // else, update ans with max of ans and sum
+        // and make sum as a[i-1]
+        // on coming out of loop,update ans with max of ans and sum
+        // return ans
+
+        int n = arr.length;
+
+        int ans = Integer.MIN_VALUE, sum = arr[0];
+
+        for (int i = 1; i < n; i++) {
+            if(arr[i] > arr[i-1]) sum += arr[i];
+            else {
+                ans = Math.max(ans, sum);
+                sum = arr[i];
+            }
+        }
+
+        ans = Math.max(ans, sum);
+
+        System.out.println("ans = " + ans);
+    }
+
+    public static void chocolateStation(int[] arr, int p) {
+        // to travel to first station, we need to buy arr[0] chocs
+        // if arr[i+1] > arr[i], our balance increases by diff
+        // else, if bal is 0, bought count increases by diff
+        // if bal is not 0, bal decreases by diff
+
+        int n = arr.length;
+        int bought = arr[0];
+        int balance = 0;
+
+        for (int i = 0; i < n-1; i++) {
+            if(arr[i] - arr[i+1] > 0) {
+                balance += arr[i] - arr[i + 1];
+            }
+            else {
+                if(balance > 0) {
+                    balance -= arr[i+1] - arr[i];
+                    if(balance < 0) {
+                        bought += Math.abs(balance);
+                        balance = 0;
+                    }
+                }
+                else {
+                    bought += arr[i+1] - arr[i];
+                }
+            }
+        }
+
+        System.out.println("bought = " + bought);
+        System.out.println(p * bought);
     }
 
     class RightNode {

@@ -3938,6 +3938,70 @@ public class ClassPrac extends TemplateClass {
         System.out.println(p * bought);
     }
 
+
+    public static void nearlySortedAlgorithm(int[] arr, int k) {
+        // create a min heap
+        // store the first k+1 elements into heap
+        // poll the heap and store it into array
+        // also from k+1 to n add elements from array to heap
+        // now poll the heap and store it into array
+
+        int n = arr.length;
+        int limit = Math.min(k+1, n);
+        int[] res = new int[n];
+        int idx = 0;
+
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int i = 0; i < limit; i++) {
+            q.add(arr[i]);
+        }
+
+        for (int i = k+1; i < n; i++) {
+            int ele = q.peek();
+            res[idx++] = ele;
+            q.poll();
+            q.add(arr[i]);
+        }
+
+        while(!q.isEmpty()) {
+            res[idx++] = q.poll();
+        }
+
+        Utils.printIntArray(res);
+    }
+
+    public static void inFirstButSecond(long[] a, long[] b) {
+        // create a hashmap of int ele vs true for arr b
+        // traverse through a and if map.get(a[i]) is null, print a[i]
+
+        HashMap<Long, Boolean> map = new HashMap<>();
+        int n = b.length;
+
+        for (int i = 0; i < n; i++) {
+            map.put(b[i], true);
+        }
+
+        int m = a.length;
+
+        for (int i = 0; i < m; i++) {
+            if(map.get(a[i]) == null) System.out.print(a[i] + " ");
+        }
+    }
+
+    public static void queriesForCountsInMultiples(int[] arr, int ele) {
+        // for each ele, check if arr[i] is divisible by ele, if yes, count++
+        int count = 0;
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            if(arr[i] % ele == 0) {
+                count++;
+
+            }
+        }
+
+        System.out.print(count + " ");
+    }
+
     class RightNode {
         int data;
         RightNode left;

@@ -4002,6 +4002,35 @@ public class ClassPrac extends TemplateClass {
         System.out.print(count + " ");
     }
 
+
+    public static void nutsAndBoltsProblem(char[] nuts, char[] bolts, int n) {
+        // the order is as follows: ! # $ % & * @ ^ ~
+        // store the order in an array
+        // store the nuts or bolts array in a map of char vs boolean
+        // traverse through order array and check if map contains order arr[i]
+        // if yes, store the order array element in a list
+
+        char[] orderArray = {'!', '#', '$' ,'%', '&' ,'*' , '@', '^' ,'~'};
+        HashMap<Character, Boolean> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            map.put(nuts[i], true);
+        }
+
+        List<Character> res = new ArrayList<>();
+        System.out.println("map = " + map);
+
+        for (int i = 0; i < orderArray.length; i++) {
+            System.out.println("orderArray[" + i + "]= " + orderArray[i]);
+            if(map.containsKey(orderArray[i])) res.add(orderArray[i]);
+        }
+
+        for (int i = 0; i < nuts.length; i++) {
+            nuts[i] = res.get(i);
+            bolts[i] = res.get(i);
+        }
+    }
+
     class RightNode {
         int data;
         RightNode left;

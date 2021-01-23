@@ -4031,6 +4031,60 @@ public class ClassPrac extends TemplateClass {
         }
     }
 
+    public static void mergeKArrays(int[][] arr, int k) {
+        // take every 2 arrays
+        // do merge procedure of merge sort on those 2 arrays
+
+        ArrayList<Integer> res = new ArrayList<>();
+
+        int n = k * k;
+
+        for (int i = 0; i < k-1; i+=2) {
+            int[] a1 = arr[i];
+            int[] a2 = arr[i+1];
+
+            int j = 0, l = 0;
+
+            while(j < k && l < k) {
+                if(a1[j] < a2[l]) res.add(a1[j++]);
+                else res.add((a2[l++]));
+            }
+
+            // copy remaining elements
+
+            while(j < k) {
+                res.add(a1[j++]);
+            }
+
+            while(l < k) {
+                res.add(a2[l++]);
+            }
+        }
+
+        res.sort(Comparator.naturalOrder());
+
+        // in case of odd k, just add the last subarray to res
+        if(k % 2 != 0) {
+            int[] lastArr = arr[k-1];
+            int l = 0, m = 0;
+
+            while(l < lastArr.length && m < res.size()) {
+                if(res.get(m) > lastArr[l]) {
+                    res.add(m, lastArr[l]);
+                    l++;
+                }
+                else m++;
+            }
+
+            // copy back the remaining elements from lastArr
+            while (l < lastArr.length) {
+                res.add(lastArr[l++]);
+            }
+        }
+
+        System.out.println("res = " + res);
+    }
+
     class RightNode {
         int data;
         RightNode left;

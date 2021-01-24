@@ -4085,6 +4085,33 @@ public class ClassPrac extends TemplateClass {
         System.out.println("res = " + res);
     }
 
+
+    public static void reArrangeArrayAlternatively(int[] arr) {
+        // given arr is sorted
+        // keep an index at the end, r,
+        // create a res array to store the result
+        // for every even index, res[i] = arr[r]
+        // keep an index at the start l
+        // for every odd index, res[i] = arr[l]
+        // do this while l < r
+
+        int n = arr.length;
+        int[] res = new int[n];
+
+        int i = 0, l = 0, r = n - 1;
+
+        while (l < r) {
+            res[i++] = arr[r--];
+            res[i++] = arr[l++];
+        }
+
+        if(n % 2 != 0) res[i] = arr[l];
+
+        System.arraycopy(res,0,arr,0,n);
+
+        Utils.printIntArray(arr);
+    }
+
     class RightNode {
         int data;
         RightNode left;

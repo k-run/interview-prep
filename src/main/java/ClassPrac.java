@@ -4112,6 +4112,183 @@ public class ClassPrac extends TemplateClass {
         Utils.printIntArray(arr);
     }
 
+    public static void nearestGreaterElementToRight(int[] arr) {
+        // question is to find the nearest greater element for each element on it's right
+        // e.g arr[i] = 1 3 2 4, ans = 3 4 4 -1
+        // Brute force solution is to use 2 loops i = 0 to n - 1 and j = i + 1 to n
+        // compare a[i] and a[j]
+        // But, as the brute force solution has dependent second loop,
+        // we can use stack for a better solution
+        // start from i = n - 1 to 0,
+        // we have to check for the greater element on right part of the array
+        // that right part will be stored in stack
+        // if stack is empty, push -1
+        // else while stack is not empty, check if top of stack > arr[i]
+        // if yes, push top of stack and break
+        // if no, pop it off
+        // push arr[i] on stack
+
+        int n = arr.length;
+        Stack<Integer> stack = new Stack<>();
+
+        List<Integer> res = new ArrayList<>();
+
+        for (int i = n-1; i >= 0; i--) {
+            if(stack.isEmpty()) res.add(-1);
+            else if(stack.peek() > arr[i]) res.add(stack.peek());
+            else {
+                while(!stack.isEmpty() && stack.peek() <= arr[i]) {
+                    stack.pop();
+                }
+
+                if(stack.isEmpty()) res.add(-1);
+                else res.add(stack.peek());
+            }
+
+            stack.push(arr[i]);
+        }
+
+        Collections.reverse(res);
+        System.out.println("res = " + res);
+    }
+
+    public static void nearestGreaterElementToLeft(int[] arr) {
+        // for every element, find the nearest greater element to the left
+        // we can use stack
+        // traverse the array from left to right
+        // for any element, stack contains the left part of the array
+        // if stack is empty, add -1
+        // else if top of stack > arr[i], add top of stacl
+        // else while stack is not empty and top of stack < arr[i], pop off stack
+        // out of while loop, check if stack is empty, if yes add -1 , else add top of stack
+        // push arr[i] to stack
+
+        int n = arr.length;
+
+        Stack<Integer> stack = new Stack<>();
+        List<Integer> res = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            if(stack.isEmpty()) res.add(-1);
+            else if(stack.peek() > arr[i]) res.add(stack.peek());
+            else {
+                while (!stack.isEmpty() && stack.peek() <= arr[i]) stack.pop();
+                if(stack.isEmpty()) res.add(-1);
+                else res.add(stack.peek());
+            }
+            stack.push(arr[i]);
+        }
+
+        System.out.println("res = " + res);
+    }
+
+    public static void nearestSmallerElementToRight(int[] arr) {
+        // given an array, for each element find the nearest smaller to the right
+        // e.g 1 3 2 4 -> -1 2 -1 -1
+        // use stack for this
+        // stack will store the right side of array for any element
+        // there are 3 conditions:
+        // if stack is empty, add -1
+        // else if top of stack < arr[i], add top of stack
+        // else, while stack is not empty and top of stack > arr[i], pop off stack
+        // on coming out of loop, check if stack is empty, if yes add -1, else add top of stack
+        // push arr[i] onto stack
+        // reverse the list
+
+
+        int n = arr.length;
+        Stack<Integer> stack = new Stack<>();
+        List<Integer> res = new ArrayList<>();
+
+        for (int i = n-1; i >= 0; i--) {
+            if(stack.isEmpty()) res.add(-1);
+            else if(stack.peek() < arr[i]) res.add(stack.peek());
+            else {
+                while(!stack.isEmpty() && stack.peek() >= arr[i]) {
+                    stack.pop();
+                }
+
+                if(stack.isEmpty()) res.add(-1);
+                else res.add(stack.peek());
+            }
+
+            stack.push(arr[i]);
+        }
+
+        Collections.reverse(res);
+
+        System.out.println("res = " + res);
+    }
+
+    public static void nearestSmallerElementToLeft(int[] arr) {
+        // for every element, find the nearest smaller element on left
+        // create a stack
+        // for every element, the left side of array will be in stack
+        // there are 3 conditions:
+        // if stack is empty, add -1 to the res
+        // else if top of stack < arr[i], add top of stack to res
+        // else, while stack is not empty and top of stack > arr[i], pop off stack
+        // out of loop, check if stack is empty, if yes, add -1 else add top of stack
+        // push arr[i] onto stack
+
+        int n = arr.length;
+        Stack<Integer> stack = new Stack<>();
+
+        List<Integer> res = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            if(stack.isEmpty()) res.add(-1);
+            else if(stack.peek() < arr[i]) res.add(stack.peek());
+            else {
+                while (!stack.isEmpty() && stack.peek() >= arr[i]) stack.pop();
+
+                if(stack.isEmpty()) res.add(-1);
+                else res.add(stack.peek());
+            }
+
+            stack.push(arr[i]);
+        }
+
+        System.out.println("res = " + res);
+
+    }
+
+    public static void stockSpan(int[] arr) {
+        // given an array of elements, find the number of consecutive elements smaller than or equal
+        // to the element before it
+        // brute force, i = 0 to n
+        // j = i - 1 to 0
+        // there is dependency on i, so we can use stack over here
+        // use stack to store the index of the nearest greater element on the left for any element
+        // store the indexes of the NGL in a list
+        // create another list to store the ans, this will be simply, i - index
+
+        int n = arr.length;
+        Stack<Integer> stack = new Stack<>();
+        List<Integer> indexList = new ArrayList<>();
+        int[] res = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if(stack.isEmpty()) indexList.add(-1);
+            else if(arr[stack.peek()] > arr[i]) indexList.add(stack.peek());
+            else {
+                while (!stack.isEmpty() && arr[stack.peek()] <= arr[i]) stack.pop();
+                if(stack.isEmpty()) indexList.add(-1);
+                else indexList.add(stack.peek());
+            }
+            stack.push(i);
+        }
+
+        System.out.println("indexList = " + indexList);
+
+        for (int i = 0; i < n; i++) {
+            res[i] = (i - indexList.get(i));
+        }
+
+        Utils.printIntArray(res);
+
+    }
+
     class RightNode {
         int data;
         RightNode left;

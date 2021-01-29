@@ -51,6 +51,12 @@ public class Utils {
         System.out.println();
     }
 
+    public static void printIntArray(String msg, int[] arr){
+        System.out.print(msg + " ");
+        Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
+        System.out.println();
+    }
+
     public static int binarySearch(int[] arr, int x){
         // returning l depending on use case
         // Here the exact position of x in arr is needed

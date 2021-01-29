@@ -4289,6 +4289,35 @@ public class ClassPrac extends TemplateClass {
 
     }
 
+    public static int findPeakElement(List<Integer> arr) {
+        // given a list which is sorted in increasing order till it reaches a number and after
+        // that it is sorted in decreasing order, find that number
+        // brute force: linear search
+        // use binary search as array is sorted
+        // if arr[m] > arr[m-1] && arr[m] > arr[m+1], return arr[m]
+        // else if arr[m] < arr[m+1], l = m + 1
+        // else h = m - 1
+        // do this while l < h
+
+        int n = arr.size();
+        int l = 0, h = n - 1;
+
+        while(l < h) {
+            int m = (l + h)/2;
+            if(arr.get(m) > arr.get(m-1) && arr.get(m) > arr.get(m+1)) {
+                return arr.get(m);
+            }
+            else if(arr.get(m) < arr.get(m+1)) l = m + 1;
+            else h = m - 1;
+
+            System.out.println("l = " + l);
+            System.out.println("m = " + m);
+            System.out.println("h = " + h);
+        }
+
+        return arr.get(l);
+    }
+
     class RightNode {
         int data;
         RightNode left;

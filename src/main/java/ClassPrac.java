@@ -4318,6 +4318,27 @@ public class ClassPrac extends TemplateClass {
         return arr.get(l);
     }
 
+    public static int findPairGivenDifference(int[] arr, int k) {
+        // create a set to store all arr elements
+        // traverse through the arr
+        // if set contains abs(k-arr[i]), return 1, else -1
+
+        int n = arr.length;
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            set.add(arr[i]);
+        }
+
+        System.out.println("set = " + set);
+
+        for (int i = 0; i < n; i++) {
+            if(set.contains(Math.abs(k-arr[i]))) return 1;
+        }
+
+        return -1;
+    }
+
     class RightNode {
         int data;
         RightNode left;

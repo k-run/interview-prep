@@ -222,13 +222,46 @@ public class TemplateClass {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int tc = Integer.parseInt(br.readLine());
         for (int i = 0; i < tc; i++) {
-            List<String> list = new ArrayList<>();
             int n = Integer.parseInt(br.readLine());
-            for (int j = 0; j < n; j++) {
-                String a = br.readLine();
-                list.add(a);
+
+            String[] a = br.readLine().split(" ");
+            List<String> list = new ArrayList<>(Arrays.asList(a));
+
+            List<Integer> arr = new ArrayList<>();
+            System.out.println("list = " + list);
+
+            for (String s: list) {
+                arr.add(Integer.parseInt(s));
             }
 
+        }
+    }
+
+    public static void inputAsTcNMultiArrays() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 0; i < tc; i++) {
+            String[] nm = br.readLine().split(" ");
+            int m = Integer.parseInt(nm[0]);
+            int n = Integer.parseInt(nm[1]);
+
+            int[] arr1 = new int[m];
+            int[] arr2 = new int[n];
+
+            String[] str1 = br.readLine().split(" ");
+            String[] str2 = br.readLine().split(" ");
+
+            for (int j = 0; j < m; j++) {
+                arr1[j] = Integer.parseInt(str1[j]);
+            }
+
+            for (int j = 0; j < n; j++) {
+                arr2[j] = Integer.parseInt(str2[j]);
+            }
+
+            String res = ClassPrac.arraySubsetOfAnotherArray(arr1, arr2);
+
+            System.out.println("res = " + res);
         }
     }
 

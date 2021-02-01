@@ -4366,6 +4366,27 @@ public class ClassPrac extends TemplateClass {
         return arr[(int) l];
     }
 
+    public static String arraySubsetOfAnotherArray(int[] arr1, int[] arr2) {
+        // given 2 arrays, check if arr2 is a subset of arr1 or not
+        // sort arr1
+        // for each element of arr2, do binarysearch on arr1
+        // if result is -1, return no
+        // outside of loop, return yes
+
+        int m = arr1.length, n = arr2.length;
+
+        Arrays.sort(arr1);
+
+        if(m < n) return "No";
+
+        for (int i = 0; i < n; i++) {
+            int index = Utils.binarySearch(arr1, arr2[i]);
+            if(index == -1) return "No";
+        }
+
+        return "Yes";
+    }
+
     class RightNode {
         int data;
         RightNode left;

@@ -58,11 +58,9 @@ public class Utils {
     }
 
     public static int binarySearch(int[] arr, int x){
-        // returning l depending on use case
-        // Here the exact position of x in arr is needed
-
-        // now returning x depending on use case
-        // Here the element itself is required
+        // generic binary search
+        // given a sorted arr and an element x, find it's position
+        // if element is not found, return -1
 
         int l = 0, n = arr.length, h = n - 1;
         while (l <= h) {
@@ -72,6 +70,6 @@ public class Utils {
             else l = m + 1;
         }
 
-        return l-1;
+        return -1;
     }
 }

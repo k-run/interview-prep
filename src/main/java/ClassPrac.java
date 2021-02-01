@@ -4339,6 +4339,33 @@ public class ClassPrac extends TemplateClass {
         return -1;
     }
 
+    public static long minNumberInSortedRotatedArray(int[] arr, long l, long h) {
+        // given a sorted and rotated array, find the min number
+        // brute force: Linear search
+        // simply check every element and update min if it's less than min
+        // But as array is sorted, we can use binary search
+        // as array is also rotated, at some point arr[m] will be < arr[l] or arr[m] will be > arr[h]
+        // while l < h
+        // if arr[m] is between arr[l] and arr[h], return arr[l], as this is the min number
+        // else if arr[m] > arr[h], l = m + 1, min number is in right subarray
+        // else h = m - 1, min number is in left subarray
+        // return arr[l]
+
+        // another case, if arr[m] itself is the min, so to accommodate that,
+        // make h = m,
+
+        int n = arr.length;
+
+        while (l < h) {
+            long m = (l + h)/2;
+            if(arr[(int) m] > arr[(int) l] && arr[(int) m] < arr[(int) h]) return arr[(int) l];
+            else if(arr[(int)m] > arr[(int) h]) l = m + 1;
+            else h = m;
+        }
+
+        return arr[(int) l];
+    }
+
     class RightNode {
         int data;
         RightNode left;

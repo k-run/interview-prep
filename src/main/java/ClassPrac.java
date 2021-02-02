@@ -4387,6 +4387,40 @@ public class ClassPrac extends TemplateClass {
         return "Yes";
     }
 
+    public static int ternarySearch(int[] arr, int k) {
+        // given a sorted array and an element, return 1 if element is present else -1
+        // we've to use ternary search to find this element
+        // in ternary search, there are 2 mids, m1 = l + (r-l)/3, m2 = r - (r-l)/3
+        // if k > arr[m2], l = m2 + 1
+        // if k < arr[m1], r = m1 - 1
+        // else l = m1 + 1, r = m2 - 1
+        // do this while l <= r
+
+        int n = arr.length;
+
+        int l = 0, h = n - 1;
+
+        while(l <= h) {
+            int m1 = l + (h-l)/3;
+            int m2 = h - (h-l)/3;
+
+            if(arr[m1] == k) return 1;
+
+            if(arr[m2] == k) return 1;
+
+            if(k > arr[m2]) l = m2 + 1;
+
+            else if(k < arr[m1]) h = m1 - 1;
+
+            else {
+                l = m1 + 1;
+                h = m2 - 1;
+            }
+        }
+
+        return -1;
+    }
+
     class RightNode {
         int data;
         RightNode left;

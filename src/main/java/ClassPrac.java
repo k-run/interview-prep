@@ -4421,6 +4421,25 @@ public class ClassPrac extends TemplateClass {
         return -1;
     }
 
+    public static void killingSpree(long n) {
+        // given an infinite pool of people, starting from i = 1
+        // whose power is i * i, and given a power n
+        // we can kill an opponent if n >= i * i
+        // also n decreases by i2 everytime it kills an opponent
+        // determine how many people can be killed
+
+        long count = 0L;
+
+        for (int i = 1; true; i++) {
+            int opponentPower = i * i;
+            n -= opponentPower;
+            if(n < 0) break;
+            count++;
+        }
+
+        System.out.println("count = " + count);
+    }
+
     class RightNode {
         int data;
         RightNode left;

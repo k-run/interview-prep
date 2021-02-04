@@ -4440,6 +4440,51 @@ public class ClassPrac extends TemplateClass {
         System.out.println("count = " + count);
     }
 
+    public static void nineDivisors(long n) {
+        // given a number n, starting from 1 to n, find how many numbers have exactly 9 divisors
+        // create a loop for i = 2 to sqrt(n)
+        // for each i, store it's square in sq
+        // init count as 2 as 1 and the number itself are the 2 divisors
+        // for j = 2 to sq/2, check if sq % j == 0, count++
+        // outside of this inner loop, if count == 9, ans'++
+
+        long ans = 0L;
+        long[] arr = new long[(int)Math.sqrt(n)];
+
+//        for (int i = 2; i <= Math.sqrt(n); i++) {
+//            int sq = i * i;
+//            int count = 2;
+//            for (int j = 2; j <= sq/2; j++) {
+//                if(sq % j == 0) count++;
+//            }
+//
+//            if(count == 9) ans++;
+//        }
+
+        int idx = 0;
+
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            arr[idx++] = i * i;
+        }
+
+        idx = 0;
+
+        Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
+        System.out.println();
+
+        while (idx < arr.length) {
+            int count = 2;
+            for (int i = 2; i <= arr[idx]/2; i++) {
+                if(arr[idx] % i == 0) count++;
+            }
+            idx++;
+            if(count == 9) ans++;
+        }
+
+        System.out.println("ans = " + ans);
+    }
+
+
     class RightNode {
         int data;
         RightNode left;

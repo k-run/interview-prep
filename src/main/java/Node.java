@@ -1,7 +1,7 @@
 class Node
 {
     int data;
-    Node left, right;
+    Node left, right, nextRight;
 
     Node(int item)
     {

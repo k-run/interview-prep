@@ -72,4 +72,46 @@ public class Utils {
 
         return -1;
     }
+
+    public static int binarySearch(int[] arr, int x, int l, int h){
+        // generic binary search
+        // given a sorted arr and an element x, find it's position
+        // if element is not found, return -1
+
+        while (l <= h) {
+            int m = (l + h)/2;
+            if(arr[m] == x) return m;
+            else if(arr[m] > x) h = m - 1;
+            else l = m + 1;
+        }
+
+        return -1;
+    }
+
+    public static int sum(int[] arr) {
+        // given an array, return sum of it's elements
+
+        return Arrays.stream(arr).reduce(0, Integer::sum);
+    }
+
+    public static int max(int[] arr) {
+        // given an array, find the max number from it
+
+       return Arrays.stream(arr).max().getAsInt();
+    }
+
+    public static void printLL(LinkedListNode head) {
+        LinkedListNode ptr = head;
+        while (ptr != null) {
+            System.out.print(ptr.data + " ");
+            ptr = ptr.next;
+        }
+    }
+
+    public static void printInOrderTree(Node node) {
+        if(node == null) return;
+        printInOrderTree(node.left);
+        System.out.print(node.data + " ");
+        printInOrderTree(node.right);
+    }
 }

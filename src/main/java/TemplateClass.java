@@ -352,13 +352,37 @@
 
         public static void inputAsTree() throws IOException {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            Node node = new Node(5);
-            node.left = new Node(1);
-            node.right = new Node(8);
+            Node node = new Node(11);
+            node.left = new Node(3);
+            //node.left.left = new Node(2);
+            node.left.right = new Node(4);
 
-            int k = Integer.parseInt(br.readLine());
-            Node ans = ClassPrac.insert(node, k);
-            Utils.printInOrderTree(ans);
+
+            node.right = new Node(17);
+            node.right.left = new Node(10);
+
+//            node.right = new Node(3);
+//            node.right.right = new Node(6);
+//            node.right.right.right = new Node(5);
+//            node.right.right.right.right = new Node(3);
+//            node.right.right.right.right.right = new Node(1);
+//            node.right.right.right.right.right.right = new Node(3);
+//            node.right.right.right.right.right.right.right = new Node(8);
+//            node.right.right.right.right.right.right.right.right = new Node(7);
+//            node.right.right.right.right.right.right.right.right.right = new Node(5);
+
+//            node.left.right = new Node(2);
+//            node.left.right.right = new Node(8);
+//
+//            node.right.left = new Node(9);
+//            node.right.right = new Node(3);
+//            node.right.left.left = new Node(8);
+//            node.right.left.right = new Node(2);
+
+            //int k = Integer.parseInt(br.readLine());
+
+           Node ans = ClassPrac.correctBST(node);
+           Utils.printInOrderTree(ans);
         }
 
         public static void main (String[] args) throws IOException

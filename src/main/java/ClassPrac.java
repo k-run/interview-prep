@@ -7635,6 +7635,171 @@
                         && isBST(root.right, root.data  + 1, max);
         }
 
+        public static List<Integer> merge2BST(Node root1, Node root2) {
+            List<Integer> tree1 = new ArrayList<>(), tree2 = new ArrayList<>();
+            inOrder(root1, tree1);
+            inOrder(root2, tree2);
+            List<Integer> res = new ArrayList<>();
+
+            int i = 0, j = 0;
+            int n1 = tree1.size(), n2 = tree2.size();
+
+            while (i < n1 && j < n2) {
+                if(tree1.get(i) < tree2.get(j)) {
+                    res.add(tree1.get(i));
+                    i++;
+
+                }
+                else {
+                    res.add(tree2.get(j));
+                    j++;
+
+                }
+            }
+
+            while(i < n1) {
+                res.add(tree1.get(i++));
+            }
+
+            while(j < n2) {
+                res.add(tree2.get(j++));
+            }
+
+            return res;
+        }
+
+       static class Result {
+            int ans;
+       }
+
+        public static int maxDiff(Node root, int k) {
+            Result result = new Result();
+            result.ans = Integer.MAX_VALUE;
+            maxDiff(root, k, result);
+            return result.ans;
+        }
+
+        public static void maxDiff(Node root, int k, Result res) {
+            if(root == null) return;
+            maxDiff(root.left, k, res);
+            res.ans = Math.min(res.ans, Math.abs(root.data - k));
+            maxDiff(root.right, k, res);
+        }
+
+        static class BSTPair {
+            int min, max, size;
+            Node root;
+            boolean isBST;
+        }
+
+        public static BSTPair largestBST(Node root) {
+            // given a binary tree, find the size of the largest BST which is a subtree of it
+            // if the entire tree is bst, return the size of the entire tree
+
+            if(root == null) {
+                BSTPair bstPair = new BSTPair();
+                bstPair.min = Integer.MIN_VALUE;
+                bstPair.max = Integer.MAX_VALUE;
+                bstPair.root = null;
+                bstPair.size = 0;
+                bstPair.isBST = true;
+                return bstPair;
+            }
+
+            BSTPair l = largestBST(root.left);
+            BSTPair r = largestBST(root.right);
+            BSTPair p = new BSTPair();
+
+            p.isBST = (l.isBST && r.isBST && root.data >= l.max && root.data <= r.min );
+
+            p.min = Math.min(root.data, Math.min(l.min, r.min));
+            p.max = Math.max(root.data, Math.max(l.max, r.max));
+
+            if(p.isBST) {
+                p.root = root;
+                p.size = l.size + r.size + 1;
+            }
+            else if(l.size > r.size) {
+                p.root = l.root;
+                p.size = l.size;
+            }
+            else {
+                p.root = r.root;
+                p.size = r.size;
+            }
+
+            return p;
+        }
+
+        public static Node correctBST(Node root) {
+            // given a BST, 2 nodes are in incorrect position, swap them back to fix the BST
+            // store the inorder traversal of tree in array
+            // there will be at most 2 places where increasing order won't be there
+            // take 3 pointers to store those elements
+            // find the smallest of those and swap with first
+            // now do the same for middle
+            // once array is sorted, now call sorted array to bst
+
+            List<Integer> arr = new ArrayList<>();
+
+            inOrder(root, arr);
+
+            int first = 0, middle = 0, last = 0, min = Integer.MAX_VALUE;
+            for (int i = 0; i < arr.size()-1; i++) {
+                if (arr.get(i) > arr.get(i + 1)) {
+                    if (first == 0) {
+                        first = i;
+                        middle = i + 1;
+                        min = Math.min(arr.get(i), arr.get(i + 1));
+                    } else {
+                        last = i + 1;
+                        min = Math.min(min, arr.get(i + 1));
+                    }
+                }
+            }
+
+                System.out.println("inorder traversal = " + arr);
+
+               // swap first and min element
+                int minIdx = arr.indexOf(min);
+                int temp;
+                arr.set(minIdx, arr.get(first));
+                arr.set(first, min);
+
+                System.out.println("arr = " + arr);
+
+                if(last == 0) {
+                    for (int i = arr.size() - 1; i >= 0 ; i--) {
+                            if(arr.get(i) < arr.get(i-1)) {
+                                last = i;
+                                break;
+                            }
+                    }
+                }
+
+                // swap middle and last
+                if(last != 0) {
+                    temp = arr.get(middle);
+                    arr.set(middle, arr.get(last));
+                    arr.set(last, temp);
+                }
+            System.out.println("arr = " + arr);
+
+            return convertSortedArrayToBST(arr.stream().mapToInt(e -> e).toArray(), 0, arr.size() - 1);
+        }
+
+
+        public static Node convertSortedArrayToBST(int[] arr, int l, int h) {
+                if(l > h) return null;
+
+                int m = l + (h-l)/2;
+                Node node = new Node(arr[m]);
+
+                node.left = convertSortedArrayToBST(arr, l, m - 1);
+                node.right = convertSortedArrayToBST(arr, m + 1, h);
+                return node;
+        }
+
         public static boolean rotAdj(int i, int j, int n, int m, int[][] arr) {
             if(i >= 0 && i < n && j >= 0 && j < m){
                    if(arr[i][j] == 1) {

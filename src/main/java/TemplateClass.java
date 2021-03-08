@@ -220,7 +220,7 @@
                     }
                 }
 
-                int k = Integer.parseInt(br.readLine());
+                //int k = Integer.parseInt(br.readLine());
 
     //            String[] startEnd = br.readLine().split(" ");
     //            int x1 = Integer.parseInt(startEnd[0]);
@@ -251,7 +251,7 @@
     //            }
 
 
-
+                System.out.println(ClassPrac.findMaxArea(a));
             }
         }
 
@@ -385,10 +385,28 @@
            Utils.printInOrderTree(ans);
         }
 
+        public static void inputAsGraph() throws IOException {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            int v = Integer.parseInt(br.readLine());
+            ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+            for (int i = 0; i < v; i++) {
+                String[] conn = br.readLine().split(" ");
+                ArrayList<Integer> c = new ArrayList<>();
+                for (String s:conn) {
+                    c.add(Integer.parseInt(s));
+                }
+                adj.add(c);
+            }
+
+            System.out.println("adj = " + adj);
+            ArrayList<Integer> res = ClassPrac.dfsOfGraph(v, adj);
+            System.out.println("res = " + res);
+        }
+
         public static void main (String[] args) throws IOException
         {
     //        //code
-            inputAsTree();
+           inputAsTcNMultiDArray();
         }
 
         public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {

@@ -7732,9 +7732,9 @@
             return p;
         }
 
-        Node last, prev, middle, first;
+        static Node last, prev, middle, first;
 
-        public Node correctBST(Node root) {
+        public static Node correctBST(Node root) {
             // given a BST, 2 nodes are in incorrect position, swap them back to fix the BST
             // store the inorder traversal of tree in array
             // there will be at most 2 places where increasing order won't be there
@@ -7764,7 +7764,7 @@
             return root;
         }
 
-        public void correctBSTUtil(Node root) {
+        public static void correctBSTUtil(Node root) {
             // traverse LRoR
             // check if prev's data > root's data
             // if yes, check if first == null, if so,
@@ -7790,6 +7790,266 @@
                 prev = root;
 
                 correctBSTUtil(root.right);
+            }
+        }
+
+        public static ArrayList<Integer> dfsOfGraph(int v, ArrayList<ArrayList<Integer>> adj) {
+            // given a connected undirected graph, print the dfs of it
+            // create a visited arr to mark nodes as visited
+            // first mark the given node as visited
+            // add the node to the ans
+            // traverse through the list of connections for that node
+            // check the connections are unvisited, recur for that connection
+
+            boolean[] visited = new boolean[v];
+            ArrayList<Integer> res = new ArrayList<>();
+            dfsOfGraph(0, adj, visited, res);
+
+            return res;
+        }
+
+        public static void dfsOfGraph(int v, ArrayList<ArrayList<Integer>> adj,
+                                      boolean[] vis, ArrayList<Integer> res) {
+            vis[v] = true;
+            res.add(v);
+            for (int i:adj.get(v)) {
+                if(!vis[i]) {
+                    dfsOfGraph(i, adj, vis, res);
+                }
+            }
+        }
+
+        public static ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+            // given a connected graph, find the bfs of it
+            // idea is to add all the connections of a node first and then add for others
+            // create a q and add 0
+            // mark 0 as visited
+            // while q is full,
+            // poll the q and add it to res
+            // traverse through the tmp's conn and check if it's not visited
+            // mark it as visited and
+            // add them to q
+
+            ArrayList<Integer> res = new ArrayList<>();
+            boolean[] visited = new boolean[V];
+            bfsOfGraph(V, adj, res, visited);
+            return res;
+        }
+
+        public static void bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj,
+                                      ArrayList<Integer> res, boolean[] visited)
+        {
+            Queue<Integer> q = new LinkedList<>();
+            q.add(0);
+            visited[0] = true;
+
+            while(!q.isEmpty()) {
+                int tmp = q.poll();
+                res.add(tmp);
+                for(int e: adj.get(tmp)) {
+                    if(!visited[e]) {
+                        visited[e] = true;
+                        q.add(e);
+                    }
+                }
+            }
+
+        }
+
+        public static boolean prerequisiteTasks(int n, int[][] prerequisite) {
+            // given a 2d array of prerequisites such that
+            // a[i][1] is a prerequisite for a[i][0] to be completed
+            // determine whether it's possible to complete all tasks
+            // detect whether there's a cycle in the graph
+
+            // create a map of int vs set<int> as adj list
+            // create a grey set to determine the visiting vertices
+            // create a black set to determine the visited vertices
+
+            HashMap<Integer, Set<Integer>> adj = new HashMap<>();
+            Set<Integer> greySet = new HashSet<>();
+            Set<Integer> blackSet = new HashSet<>();
+
+            // create adj map
+            for (int i = 0; i < n; i++) {
+                adj.put(i, new HashSet<>());
+            }
+
+            for (int i = 0; i < prerequisite.length; i++) {
+                adj.get(prerequisite[i][1]).add(prerequisite[i][0]);
+            }
+
+            // detect whether there is a cycle or not
+            // iterate through all vertices
+            for (int i = 0; i < n; i++) {
+                boolean hasCycle = detectCycle(i, greySet, blackSet, adj);
+                if(hasCycle) return false;
+            }
+
+            return true;
+        }
+
+
+        static boolean detectCycle(int i, Set<Integer> greySet, Set<Integer> blackSet, HashMap<Integer, Set<Integer>> adj) {
+            // if vertex is already visited, return false
+
+            if(blackSet.contains(i)) return false;
+
+            // if vertex is already visiting, meaning some other conn. add it to
+            // grey set, return true
+
+            if(greySet.contains(i)) return true;
+
+            // add it to visiting
+
+            greySet.add(i);
+
+            // iterate through all it's conn
+            for (Integer e: adj.get(i)) {
+                if(!blackSet.contains(e)) {
+                boolean ans = detectCycle(e, greySet, blackSet, adj);
+                if(ans) return true;
+                }
+            }
+
+            // move from gray set to black set
+            greySet.remove(i);
+            blackSet.add(i);
+
+            return false;
+        }
+
+        public static int findMaxArea(int[][] arr) {
+            // given a 2d array, find area of largest region of 1's
+            // largest region means 8 way connected 1's
+
+            // will use class Result as we need to pass by reference
+            // iterate through arr to find 1
+            // to count only connected 1's, make result.ans = 0
+            // as 1st statement after 2 loops
+            // as soon as found 1, call findMAxArea(i,j,result)
+            // check for out of bounds, if it is out of bounds return
+            // else result.ans++
+            // mark arr[i][j] = 0 to prevent recalculating it
+            // recur for 8 connected neighbours
+
+            int n = arr.length, m = arr[0].length;
+
+            int res = -1;
+
+            // pass result by reference
+            Result result = new Result();
+            result.ans = 0;
+
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    result.ans = 0;
+                    if(arr[i][j] == 1) {
+                       findMaxArea(i, j, result, arr);
+                       res = Math.max(res, result.ans);
+                    }
+                }
+            }
+
+
+            return res;
+        }
+
+        public static void findMaxArea(int i, int j, Result result, int[][] arr) {
+            // if a[i][j] is 1, count++
+            // do dfs of all 8 neighbours
+
+            if(i < 0 || i >= arr.length || j < 0 || j >= arr[0].length || arr[i][j] == 0 || arr[i][j] == 2)
+                return;
+
+            result.ans++;
+
+            arr[i][j] = 2;
+
+            findMaxArea(i - 1, j - 1, result, arr);
+
+            findMaxArea(i - 1, j, result, arr);
+
+            findMaxArea(i - 1, j + 1, result, arr);
+
+            findMaxArea(i, j - 1, result, arr);
+
+            findMaxArea(i, j + 1, result, arr);
+
+            findMaxArea(i + 1, j - 1, result, arr);
+
+            findMaxArea(i + 1, j, result, arr);
+
+            findMaxArea(i + 1, j + 1, result, arr);
+
+        }
+
+
+        public static int spanningTree(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj) {
+            // given an adj list, create a min spanning tree and return the total weight
+            // Kruskal's algo:
+            // 1. sort the edges in asc. order
+            // 2. pick the edge with min weight. check if it creates cycle
+            // if not, add it to set
+            // 3. repeat step 2 until we've v-1 edges
+            // create classes edge and DS
+            // create a list of edge from adj
+            // create a list of DS
+            // run a loop from 0 to v, init parent as -1 and rank as 0
+            // sort the edges list
+            // while i < v-1 && j < e
+            // get fromP and toP using find()
+            // check if fromP and toP are same, i.e check if there's a cycle
+            // if yes, continue, j++
+            // else union()
+            // add the vertex to set
+
+            List<Edge> edges = new ArrayList<>();
+            List<DS> ds = new ArrayList<>();
+            //Set<Edgs>
+            for (int i = 0; i < adj.size(); i++) {
+                Edge edge = new Edge();
+                edge.setSrc(i);
+                for(ArrayList<Integer> l : adj.get(i)) {
+                    edge.setDest(l.get(0));
+                    edge.setWeight(l.get(1));
+                }
+                edges.add(edge);
+            }
+
+            for (int i = 0; i < v; i++) {
+                DS dset = new DS();
+                dset.setParent(-1);
+                dset.setRank(0);
+                ds.add(dset);
+            }
+
+            kruskal(edges, ds, v);
+        }
+
+        static void kruskal(List<Edge> edges, List<DS> ds, int v) {
+            edges.sort(new Comparator<Edge>() {
+                @Override
+                public int compare(Edge o1, Edge o2) {
+                    return o1.getWeight() - o2.getWeight();
+                }
+            });
+
+            int i = 0, j= 0;
+            int e = v;
+
+            while(i < v-1 && j < e) {
+                int fromP = DSFind(edges.get(j).getSrc());
+                int toP = DSFind(edges.get(j).getDest());
+
+                if(fromP == toP) {
+                    j++;
+                    continue;
+                }
+
+                else DSUnion(fromP, toP);
+
             }
         }
 

@@ -43,6 +43,8 @@ public class Graph {
         DFSUtil(v, visited);
     }
 
+    public ArrayList<ArrayList<Integer>> getAdj() { return this.adj;}
+
     public static void main(String[] args) {
         Graph g = new Graph(5);
 

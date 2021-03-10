@@ -7670,6 +7670,7 @@
 
        static class Result {
             int ans;
+            int i;
        }
 
         public static int maxDiff(Node root, int k) {
@@ -8007,7 +8008,8 @@
 
             List<Edge> edges = new ArrayList<>();
             List<DS> ds = new ArrayList<>();
-            //Set<Edgs>
+            Set<Edge> mst = new HashSet<>();
+
             for (int i = 0; i < adj.size(); i++) {
                 Edge edge = new Edge();
                 edge.setSrc(i);
@@ -8018,6 +8020,8 @@
                 edges.add(edge);
             }
 
+            System.out.println("edges = " + edges);
+
             for (int i = 0; i < v; i++) {
                 DS dset = new DS();
                 dset.setParent(-1);
@@ -8025,33 +8029,312 @@
                 ds.add(dset);
             }
 
-            kruskal(edges, ds, v);
+            System.out.println("ds = " + ds);
+
+            kruskal(edges, ds, v, mst);
+
+            int ans = 0;
+            for(Edge e : mst) {
+                ans += e.getWeight();
+            }
+            return ans;
         }
 
-        static void kruskal(List<Edge> edges, List<DS> ds, int v) {
-            edges.sort(new Comparator<Edge>() {
-                @Override
-                public int compare(Edge o1, Edge o2) {
-                    return o1.getWeight() - o2.getWeight();
-                }
-            });
+        static void kruskal(List<Edge> edges, List<DS> ds, int v, Set<Edge> mst) {
+            edges.sort(Comparator.comparingInt(Edge::getWeight));
 
             int i = 0, j= 0;
             int e = v;
 
             while(i < v-1 && j < e) {
-                int fromP = DSFind(edges.get(j).getSrc());
-                int toP = DSFind(edges.get(j).getDest());
+                int fromP = DSFind(edges.get(j).getSrc(), ds);
+                int toP = DSFind(edges.get(j).getDest(), ds);
 
                 if(fromP == toP) {
                     j++;
                     continue;
                 }
 
-                else DSUnion(fromP, toP);
+                else DSUnion(fromP, toP, ds);
 
+                mst.add(edges.get(j));
+                ++i;
             }
         }
+
+        static int DSFind(int v, List<DS> ds) {
+            if(ds.get(v).getParent() == -1) return v;
+
+            int parent = DSFind(ds.get(v).getParent(), ds);
+            ds.get(v).setParent(parent);
+            return parent;
+        }
+
+        static void DSUnion(int fromP, int toP, List<DS> ds) {
+                if(ds.get(fromP).getRank() > ds.get(toP).getRank()) {
+                    ds.get(toP).setParent(fromP);
+                }
+
+                else if(ds.get(toP).getRank() > ds.get(fromP).getRank()) {
+                    ds.get(fromP).setParent(toP);
+                }
+
+                else {
+                    ds.get(fromP).setParent(toP);
+                    int rank = ds.get(toP).getRank();
+                    ds.get(toP).setRank(rank + 1);
+                }
+        }
+
+        public static boolean isWordExist(char[][] arr, String word){
+            // given a 2d arr of chars and a word, find whether word exists
+            // word can only be created using 4 neighbours, 1 up, 1 down, 1 left, 1 right
+            // use dfs here
+            // traverse through the 2d array and as soon as first char is found
+            // we will start applying dfs() on it
+            // in dfs, we will check for bounds and special char and equal char
+            // if not met, return
+            // count++
+            // arr[i][j] = ' ' to mark it as visited
+            // recur for 4 neighbours
+            // finally, if count == word.length() return true
+
+            int n = arr.length;
+            int m = arr[0].length;
+
+            Result result = new Result();
+            result.i = 0;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    //result.ans = 0;
+                    result.i = 0;
+                    if(arr[i][j] == word.charAt(0)) {
+                        //arr[i][j] = ' ';
+                        dfs(i , j, result, arr, word);
+                        if(result.ans == word.length()) return true;
+                        result.ans = 0;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public static void dfs(int i, int j, Result result, char[][] arr, String s) {
+            if(result.i == s.length()) return;
+            if(i < 0 || i>= arr.length || j < 0 || j >= arr[0].length || arr[i][j] == ' ' ||
+                    arr[i][j] != s.charAt(result.i))
+                return;
+            result.ans++;
+            arr[i][j] = ' ';
+            result.i++;
+            dfs(i - 1, j, result, arr, s);
+            dfs(i + 1, j, result, arr, s);
+            dfs(i, j - 1, result, arr,s);
+            dfs(i, j + 1, result, arr, s);
+        }
+
+        public static int[] topoSort(int v, ArrayList<ArrayList<Integer>> adj) {
+            // given a directed graph, find out it's topological sorting
+            // topological sort for a directed edge from u to v, u becomes before v in sort
+            // sort the vertices by the number of indegrees in asc. order
+
+            // similar to dfs
+            // just add it to stack at the end
+            // the vertex with the most indegree will be at the bottom of stack
+            // the vertex with least indegree at the top
+
+            Stack<Integer> stack = new Stack<>();
+            boolean[] visited = new boolean[v];
+            for (int i = 0; i < v; i++) {
+                if(!visited[i]) topoSort(i, adj, stack, visited);
+            }
+
+            Collections.reverse(stack);
+            return stack.subList(0, stack.size()).stream().mapToInt(i -> i).toArray();
+        }
+
+        public static void topoSort(int v, ArrayList<ArrayList<Integer>> adj,
+                                    Stack<Integer> stack, boolean[] visited) {
+
+            visited[v] = true;
+            for(int e : adj.get(v)) {
+                if(!visited[e]) topoSort(e, adj, stack, visited);
+            }
+            stack.push(v);
+        }
+
+        public static int numIslands(char[][] arr) {
+            // given a 2d array of land (1's) and water (0's)
+            // find no. of islands
+            // an island is land surrounded by water and is connected to 8 adj. lands
+
+            // use dfs
+            // use Result class to pass by ref
+            // iterate through the arr
+            // as soon as found 1, dfs
+            // in dfs, check for boundary condt. or arr[i][j] == ' ' to mark visited
+            // or arr[i][j] == 0 return
+            // else update result's count
+            // recur for 8 connected neighbours
+
+            int n = arr.length, m = arr[0].length;
+            int count = 0;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if(arr[i][j] == '1') {
+                        count++;
+                        numIslands(i, j, arr);
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        public static void numIslands(int i, int j, char[][] arr) {
+            if(i < 0 || i >= arr.length || j < 0 || j>= arr[0].length || arr[i][j] != '1')
+                return;
+
+            arr[i][j] = '0';
+            numIslands(i-1, j-1, arr);
+            numIslands(i-1, j, arr);
+            numIslands(i-1, j+1, arr);
+
+            numIslands(i, j-1, arr);
+            numIslands(i, j+1, arr);
+
+            numIslands(i+1, j-1, arr);
+            numIslands(i+1, j, arr);
+            numIslands(i+1, j+1, arr);
+        }
+
+        public static int nthGeekoNacci(int a, int b, int c, int n) {
+            // given 4 numbers a, b, c and n find nth geekonacci number
+            // a geekonacci number is sum of previous 3 numbers
+            // i.e f(n) = f(n-1) + f(n-2) + f(n-3)
+
+            if(n == 1) return a;
+            if(n == 2) return b;
+            if(n == 3) return c;
+
+            int n1 = nthGeekoNacci(a, b, c, n-1);
+            int n2 = nthGeekoNacci(a, b, c, n-2);
+            int n3 = nthGeekoNacci(a, b, c, n-3);
+
+            return n1 + n2+ n3;
+        }
+
+        public static String removeDups(String s) {
+            // given a string remove dups from it only keep first occurrence of the dup
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < s.length(); i++) {
+                if(s.indexOf(s.charAt(i)) == s.lastIndexOf(s.charAt(i))) {
+                    sb.append(s.charAt(i));
+                }
+                else {
+                    if(sb.indexOf(String.valueOf(s.charAt(i))) == -1) {
+                        sb.append(s.charAt(i));
+                    }
+                }
+            }
+
+            return sb.toString();
+        }
+
+        public static int closing(String s, int pos) {
+            // given a string with '[' and ']' and the pos of [
+            // find the index of the ]
+
+            int o = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if(s.charAt(i) == '[' && i >= pos) o++;
+                else if(s.charAt(i) == ']' && o > 0) {
+                    o--;
+                    if(o == 0) return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public static int minChangesToMakeSubStringDistinct(String s) {
+            // given a string, find out how many changes needs to be
+            // done to make all substrings distinct
+
+            int n = s.length();
+            HashMap<Character,Integer> map = new HashMap<>();
+
+            for (int i = 0; i < n; i++) {
+                map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+            }
+
+            int ans = 0;
+            for (Integer r:map.values()) {
+                ans += r-1;
+            }
+
+            return ans;
+        }
+
+        public static String[] wordBoggle(char[][] board, String[] dict) {
+            // given a string arr of words as dict, & a 2d array
+            // return the strings of dict present in the board
+
+            int n = dict.length;
+            ArrayList<String> res = new ArrayList<>();
+            boolean[][] visited = new boolean[board.length][board[0].length];
+
+
+            for (int i = 0; i < n; i++) {
+                if(isWordPresent(new StringBuilder(dict[i]), board, new StringBuilder(dict[i]), visited)) {
+                        res.add(dict[i]);
+                }
+            }
+
+            return res.toArray(new String[0]);
+        }
+
+        public static boolean isWordPresent(StringBuilder sb, char[][] board,
+                                            StringBuilder original, boolean[][] visited){
+            int n = board.length, m = board[0].length;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if(board[i][j] == sb.charAt(0)) {
+                        dfs(i, j, sb, board, visited);
+                        if(sb.length() == 0) return true;
+                        System.out.println("failed char = " + board[i][j]);
+//                        int index = original.indexOf(String.valueOf(board[i][j]));
+//                        sb = new StringBuilder(original.substring(index + 1));
+                        sb = original;
+                        visited[i][j] = false;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static void dfs(int i, int j, StringBuilder sb, char[][] board, boolean[][] visited) {
+            if(i < 0 || i >= board.length || j < 0 || j>= board[0].length || visited[i][j]
+                    || sb.length() == 0 || board[i][j] != sb.charAt(0))
+                return;
+            visited[i][j] = true;
+            sb.deleteCharAt(0);
+            dfs(i - 1, j - 1, sb, board, visited);
+            dfs(i - 1, j, sb, board, visited);
+            dfs(i - 1, j + 1, sb, board, visited);
+
+            dfs(i, j - 1, sb, board, visited);
+            dfs(i, j + 1, sb, board, visited);
+
+            dfs(i + 1, j - 1, sb, board, visited);
+            dfs(i + 1, j, sb, board, visited);
+            dfs(i + 1, j + 1, sb, board, visited);
+        }
+
+
 
         public static boolean rotAdj(int i, int j, int n, int m, int[][] arr) {
             if(i >= 0 && i < n && j >= 0 && j < m){

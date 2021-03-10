@@ -149,8 +149,13 @@
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             int tc = Integer.parseInt(br.readLine());
             for (int i = 0; i < tc; i++) {
-                int n = Integer.parseInt(br.readLine());
+                String[] n = br.readLine().split(" ");
+                int a = Integer.parseInt(n[0]);
+                int b = Integer.parseInt(n[1]);
+                int c = Integer.parseInt(n[2]);
+                int N = Integer.parseInt(n[3]);
 
+                System.out.println(ClassPrac.nthGeekoNacci(a,b,c,N));
             }
         }
 
@@ -194,7 +199,6 @@
             for (int i = 0; i < tc; i++) {
                 String a = br.readLine();
 
-
             }
         }
 
@@ -210,17 +214,19 @@
                 int n = Integer.parseInt(nm[0]);
                 int m = Integer.parseInt(nm[1]);
 
-                String[] str = br.readLine().split(" ");
-                int[][] a = new int[n][m];
+
+                char[][] a = new char[n][m];
 
                 int idx = 0;
+
                 for (int j = 0; j < n; j++) {
+                    String[] str = br.readLine().split(" ");
                     for (int k = 0; k < m; k++) {
-                        a[j][k] = Integer.parseInt(str[idx++]);
+                        a[j][k] = str[k].charAt(0);
                     }
                 }
 
-                //int k = Integer.parseInt(br.readLine());
+                    String[] s = br.readLine().split(" ");
 
     //            String[] startEnd = br.readLine().split(" ");
     //            int x1 = Integer.parseInt(startEnd[0]);
@@ -251,7 +257,8 @@
     //            }
 
 
-                System.out.println(ClassPrac.findMaxArea(a));
+                    String[] arr = ClassPrac.wordBoggle(a,s);
+                    Arrays.stream(arr).forEach(e-> System.out.print(e + " "));
             }
         }
 
@@ -406,7 +413,7 @@
         public static void main (String[] args) throws IOException
         {
     //        //code
-           inputAsTcNMultiDArray();
+            inputAsTcNMultiDArray();
         }
 
         public static void maxAfterMIncrementsDriver(BufferedReader br, int n, int m) throws IOException {
